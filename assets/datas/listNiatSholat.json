@@ -1,0 +1,131 @@
+[
+    {
+        "id": 1,
+        "name": "Niat Sholat Subuh",
+        "arabic": "اُصَلِّى فَرْضَ الصُّبْحِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً ِللهِ تَعَالَى",
+        "latin": "Ushalli fardhosh shubhi rok'ataini mustaqbilal qiblati adaa-an lillaahi ta'aala",
+        "terjemahan": "Aku berniat shalat fardhu Shubuh dua raka'at menghadap kiblat karena Allah Ta'ala"
+    },
+    {
+        "id": 2,
+        "name": "Niat Sholat Dzuhur",
+        "arabic": "اُصَلِّى فَرْضَ الظُّهْرِاَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً ِللهِ تَعَالَى",
+        "latin": "Ushalli fardhodl dhuhri arba'a raka'aatim mustaqbilal qiblati adaa-an lillaahi ta'aala",
+        "terjemahan": "Aku berniat shalat fardhu Dzuhur empat raka'at menghadap kiblat karena Allah Ta'ala"
+    },
+    {
+        "id": 3,
+        "name": "Niat Sholat Ashar",
+        "arabic": "اُصَلِّى فَرْضَ الْعَصْرِاَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً ِللهِ تَعَالَى",
+        "latin": "Ushalli fardhol 'ashri arba'a raka'aatim mustaqbilal qiblati adaa-an lillaahi ta'aala",
+        "terjemahan": "Aku berniat shalat fardhu 'Ashar empat raka'at menghadap kiblat karena Allah Ta'ala"
+    },
+    {
+        "id": 4,
+        "name": "Niat Sholat Maghrib",
+        "arabic": "اُصَلِّى فَرْضَ الْمَغْرِبِ ثَلاَثَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً ِللهِ تَعَالَى",
+        "latin": "Ushalli fardhol maghribi tsalaata raka'aatim mustaqbilal qiblati adaa-an lillaahi ta'aala",
+        "terjemahan": "Aku berniat shalat fardhu Maghrib tiga raka'at menghadap kiblat karena Allah Ta'ala"
+    },
+    {
+        "id": 5,
+        "name": "Niat Sholat Isya",
+        "arabic": "اُصَلِّى فَرْضَ الْعِشَاءِ اَرْبَعَ رَكَعَاتٍ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً ِللهِ تَعَالَى",
+        "latin": "Ushalli fardhol 'isyaa-i arba'a raka'aatim mustaqbilal qiblati adaa-an lillaahi ta'aala",
+        "terjemahan": "Aku berniat shalat fardhu Isya empat raka'at menghadap kiblat karena Allah Ta'ala"
+    },
+    {
+        "id": 6,
+        "name": "Niat Sholat Tahiyyatul Masjid",
+        "arabic": "أصَلَّى سُنَّةَ التَّحِيَّةَ الْمَسْجِد رَكْعَتَيْنِ اللهِ تَعَالَى",
+        "latin": "Ushalli sunnatat tahiyyatal masjidi rak'ataini lillahi ta'aalaa",
+        "terjemahan": "Aku niat salat sunah tahiyyatal masjid dua rakaat karena Allah ta'ala"
+    },
+    {
+        "id": 7,
+        "name": "Niat Sholat Tahajud",
+        "arabic": "اُصَلِّى سُنَّةً التَّهَجُّدِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ ِللهِ تَعَالَى",
+        "latin": "Ushalli sunnatat tahajjudi rak'ataini mustaqbilal qiblati lillahi ta'ala.",
+        "terjemahan": "Aku berniat shalat sunnah tahajud dua rakaat, menghadap kiblat, karena Allah ta'ala."
+    },
+    {
+        "id": 8,
+        "name": "Niat Sholat Taubat",
+        "arabic": "أُصَلِّى سُنَّةَ التَّوْبَةِ رَكْعَتَيْنِ ِللهِ تَعَالَى",
+        "latin": "Ushallii sunnatat-taubati rak'ataini lillaahi ta'aalaa. Allahu akbar.",
+        "terjemahan": "Saya mohon kepada Allah Yang Maha Agung, Dzat yang tiada Tuhan melainkan hanya Dia Yang Maha Hidup lagi Berdiri Sendiri. Aku bertaubat kepada Nya"
+    },
+    {
+        "id": 9,
+        "name": "Niat Sholat Dhuha",
+        "arabic": "اُصَلِّى سُنَّةَ الضَّحٰى رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ اَدَاءً ِللهِ تَعَالَى",
+        "latin": "Ushalli fardhol 'ashri arba'a raka'aatim mustaqbilal qiblati adaa-an lillaahi ta'aala",
+        "terjemahan": "Aku niat sholat dhuha dua rakaat, karena Allah ta'ala."
+    },
+    {
+        "id": 10,
+        "name": "Niat Sholat Idul Fitri untuk imam",
+        "arabic": "اُصَلِّى سُنَّةً لِعِيْدِ الفِطْرِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً إِمَامًا للهِ تَعَالَى",
+        "latin": "Ushalli sunnatan li Idil Fitri rak'atayni mustaqbilal qiblati adā'an imāman lillāhi ta'ālā.",
+        "terjemahan": "Aku menyengaja sembahyang sunnah Idul Fitri dua rakaat dengan menghadap kiblat, tunai sebagai imam karena Allah SWT"
+    },
+    {
+        "id": 11,
+        "name": "Niat Sholat Idul Fitri untuk makmum",
+        "arabic": "اُصَلِّى سُنَّةً لِعِيْدِ الفِطْرِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً مَأْمُوْمًا لِلهِ تَعَالَى",
+        "latin": "Ushalli sunnatan li Idil Fitri rak'atayni mustaqbilal qiblati adā'an ma'mūman lillāhi ta'ālā.",
+        "terjemahan": "Aku menyengaja sembahyang sunnah Idul Fitri dua rakaat dengan menghadap kiblat, tunai sebagai makmum karena Allah SWT"
+    },
+    {
+        "id": 12,
+        "name": "Niat Sholat Idul Fitri untuk sendiri",
+        "arabic": "اُصَلِّى سُنَّةً لِعِيْدِ الفِطْرِ رَكْعَتَيْنِ مُسْتَقْبِلَ الْقِبْلَةِ أَدَاءً للهِ تَعَالَى",
+        "latin": "Ushalli sunnatan li Idil Fitri rak'atayni mustaqbilal qiblati adā'an lillāhi ta'ālā.",
+        "terjemahan": "Aku menyengaja sembahyang sunnah Idul Fitri dua rakaat dengan menghadap kiblat karena Allah SWT."
+    },
+    {
+        "id": 13,
+        "name": "Niat Sholat Idul Adha untuk imam",
+        "arabic": "أُصَلِّي رَكْعَتَيْنِ سُنَّةً لِعِيْدِ الْأَضْحَى إِمَامًا لِلّهِ تَعَــــالَى",
+        "latin": "Usholli rak'ataini sunnatan li 'idil adha imaman lillahi ta'ala.",
+        "terjemahan": "Aku berniat salat sunnah Iduladha dua rakaat menjadi imam karena Allah ta'ala"
+    },
+    {
+        "id": 14,
+        "name": "Niat Sholat Idul Adha untuk makmum",
+        "arabic": "أصَلَّى سُنَّةَ التَّحِيَّةَ الْمَسْجِد رَكْعَتَيْنِ اللهِ تَعَالَى",
+        "latin": "Usholli rak'ataini sunnatan li 'idil adha ma'muman lillahi ta'ala.",
+        "terjemahan": "Aku berniat shalat sunnah Idul Adha dua rakaat menjadi makmum karena Allah ta'ala."
+    },
+    {
+        "id": 15,
+        "name": "Niat Sholat Qadha Sholat Subuh",
+        "arabic": "أصلي فرض الصبح ركعتين مستقبل القبلة قضاء لله تعالى",
+        "latin": "Usholli fardhos subhi rok'ataini mustaqbilal qiblati qodho'an lillahi ta'ala",
+        "terjemahan": "Saya (berniat) mengerjakan sholat fardhu Subuh dua raka'at dengan menghadap kiblat serta qodho karena Allah Ta'ala."
+    },{
+        "id": 16,
+        "name": "Niat Sholat Qadha Sholat Dzuhur",
+        "arabic": "أصلي فرض الظهر أربع ركعات مستقبل القبلة قضاء لله تعالى",
+        "latin": "Usholli fardhoz zuhri arba'a roka'atin mustaqbilal qiblati qodho'an lillahi ta'ala.",
+        "terjemahan": "Saya (berniat) mengerjakan sholat fardhu Dzuhur sebanyak empat rakaat dengan menghadap kiblat serta qadho karena Allah Ta'ala."
+    },{
+        "id": 17,
+        "name": "Niat Sholat Qadha Sholat Ashar",
+        "arabic": "أصلي فرض العصر أربع ركعات مستقبل القبلة قضاء لله تعالى",
+        "latin": "Usholli fardhol 'ashri arba'a roka'atin mustaqbilal qiblati qodho'an lillahi ta'ala",
+        "terjemahan": "Saya (berniat) mengerjakan sholat fardhu ashar sebanyak empat rakaat dengan menghadap kiblat serta qadho karena Allah Ta'ala."
+    },{
+        "id": 18,
+        "name": "Niat Sholat Qadha Sholat Maghrib",
+        "arabic": "أصلي فرض المغرب ثلاث ركعات مستقبل القبلة قضاء لله تعالى",
+        "latin": "Usholli fardhol maghribi tsalatsa roka'atin mustaqbilal qiblati qodho'an lillahi ta'ala",
+        "terjemahan": "Saya (berniat) mengerjakan sholat fardhu maghrib sebanyak tiga rakaat dengan menghadap kiblat serta qadho karena Allah Ta'ala."
+    },{
+        "id": 19,
+        "name": "Niat Sholat Qadha Sholat Isya",
+        "arabic": "أصلي فرض العشاء أربع ركعات مستقبل القبلة قضاء لله تعالى",
+        "latin": "Usholli fardhol isya'i arba'a roka'atin mustaqbilal qiblati qodho'an lillahi ta'ala",
+        "terjemahan": "Saya (berniat) mengerjakan sholat fardhu isya sebanyak empat rakaat dengan menghadap kiblat serta qadho karena Allah Ta'ala."
+    }
+]
