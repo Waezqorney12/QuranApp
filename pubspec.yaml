@@ -94,7 +94,7 @@ flutter:
   - assets/png/Bewarna/DoaColor.png
   - assets/png/Bewarna/FotoTafsirColor.png
   - assets/png/Bewarna/FotoSholatColor.png
-
+  - assets/png/Bewarna/HadistColor.png
 
 # Aset Tidak Bewarna
   - assets/png/TidakBewarna/TitikSurah.png

@@ -17,6 +17,8 @@ class assetDart{
   static const String splashPertama = "assets/png/Bewarna/FotoTafsirColor.png";
   static const String splashKedua = "assets/png/Bewarna/FotoSholatColor.png";
   static const String splashKetiga = "assets/svg/LogoQuran.svg";
+
+  static const String gambarHadist = "assets/png/Bewarna/HadistColor.png";
   
 
 }
