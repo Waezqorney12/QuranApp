@@ -4,17 +4,19 @@ import 'package:al_quran/Model/bacaanDoaModel.dart';
 import 'package:al_quran/Model/bacaanNiatModel.dart';
 import 'package:al_quran/Model/bacaanSholatModel.dart';
 import 'package:al_quran/Model/detailHadisModel.dart';
+import 'package:al_quran/Model/detailJuzModel.dart';
+import 'package:al_quran/Model/detailSurahModel.dart';
 import 'package:al_quran/Model/listSurahModel.dart';
 import 'package:al_quran/Model/namaJuzModel.dart';
 import 'package:al_quran/Model/tokohHadistModel.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-
-import '../SurahPage/DetailPage/DetailJuz.dart';
 import 'package:al_quran/Model/listTafsirModel.dart';
+import 'package:logger/logger.dart';
 
 class ServiceClass {
+  Logger log = Logger();
   Future<List> getServiceSholat() async {
     List dataBacaanSholat = [];
 
@@ -96,7 +98,6 @@ class ServiceClass {
     final data = await http.get(url);
     
     Map<String, dynamic> parseData = (jsonDecode(data.body)as Map<String, dynamic>)["data"] ;
-    print(parseData);
     
     return TafsirQuran.fromJson(parseData);
   }
@@ -106,7 +107,31 @@ class ServiceClass {
     final data = await http.get(url);
 
     Map<String, dynamic> parseData = (jsonDecode(data.body) as Map<String, dynamic>)["data"];
-    print("Ini parseData: $parseData");
+
     return DetailHadis.fromJson(parseData);
   }
+
+
+  Future<DetailClass> getDetailSurah({required dynamic nomor}) async {
+    final url =
+        Uri.parse("https://equran.id/api/v2/surat/$nomor");
+    final res = await http.get(url);
+
+    Map<String, dynamic> data =
+        (json.decode(res.body) as Map<String, dynamic>)["data"];
+
+        print(" Ini parseData: $data");
+    // DetailClass datas = DetailClass.fromJson(data);
+    return DetailClass.fromJson(data);
+  }
+
+  
+  Future<DetailJuz> getDetailJuz({required dynamic nomor}) async {
+  final url = Uri.parse("https://api.quran.gading.dev/juz/$nomor");
+  final data = await http.get(url);
+
+  Map<String, dynamic> parseData = (jsonDecode(data.body) as Map<String, dynamic>)["data"];
+  return DetailJuz.fromJson(parseData);
+}
+
 }

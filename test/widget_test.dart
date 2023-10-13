@@ -8,38 +8,26 @@
 import 'dart:convert';
 
 import 'package:al_quran/Model/detailSurahModel.dart';
+import 'package:al_quran/Service/ServiceClass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:al_quran/main.dart';
 
 void main() async {
-  Future<DetailClass> _getDetailSurah(String id) async {
-    final url = Uri.parse("https://equran.id/api/v2/surat/$id");
-    final res = await http.get(url);
+  group('ServiceClass tests', () {
+    test('getDetailJuz returns valid data', () async {
+      final service = ServiceClass();
+      final nomor = 30; // Sesuaikan dengan nomor yang sesuai dengan data tes Anda
 
-    Map<String, dynamic> data =
-        (json.decode(res.body) as Map<String, dynamic>)["data"];
+      final detailJuz = await service.getDetailJuz(nomor: nomor);
 
-    DetailClass datas = DetailClass.fromJson(data);
-    print(datas);
-    return DetailClass.fromJson(data);
-  }
-  await _getDetailSurah(2.toString());
-  // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-  //   // Build our app and trigger a frame.
-  //   await tester.pumpWidget(const MyApp());
+      expect(detailJuz, isNotNull);
+      expect(detailJuz.juz, isNotNull);
+      expect(detailJuz.juzStartInfo, isNotNull);
+      expect(detailJuz.juzEndInfo, isNotNull);
 
-  //   // Verify that our counter starts at 0.
-  //   expect(find.text('0'), findsOneWidget);
-  //   expect(find.text('1'), findsNothing);
-
-  //   // Tap the '+' icon and trigger a frame.
-  //   await tester.tap(find.byIcon(Icons.add));
-  //   await tester.pump();
-
-  //   // Verify that our counter has incremented.
-  //   expect(find.text('0'), findsNothing);
-  //   expect(find.text('1'), findsOneWidget);
-  // });
+      // Tambahkan pengujian lebih lanjut sesuai dengan kebutuhan Anda
+    });
+  });
 }

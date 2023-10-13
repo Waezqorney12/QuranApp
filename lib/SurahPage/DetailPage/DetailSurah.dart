@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/Model/detailSurahModel.dart';
+import 'package:al_quran/Service/ServiceClass.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
@@ -29,18 +30,7 @@ class _DetailSurahState extends State<DetailSurah> {
   final player = AudioPlayer();
 
   
-  Future<DetailClass> _getDetailSurah() async {
-    final url =
-        Uri.parse("https://equran.id/api/v2/surat/${widget.nomorSurah}");
-    final res = await http.get(url);
-
-    Map<String, dynamic> data =
-        (json.decode(res.body) as Map<String, dynamic>)["data"];
-
-        print(" Ini parseData: $data");
-    // DetailClass datas = DetailClass.fromJson(data);
-    return DetailClass.fromJson(data);
-  }
+  
 
   @override
   void dispose() {
@@ -53,7 +43,7 @@ class _DetailSurahState extends State<DetailSurah> {
     final logger = Logger();
 
     return FutureBuilder<DetailClass>(
-      future: _getDetailSurah(),
+      future: ServiceClass().getDetailSurah(nomor: widget.nomorSurah),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           // Menampilkan loading spinner

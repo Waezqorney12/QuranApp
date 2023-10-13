@@ -45,9 +45,10 @@ class _ListJuzState extends State<ListJuz> {
         return ListView.separated(
             itemBuilder: (context, index) {
               int nomor = nomors + index;
+              
               return GestureDetector(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailJuz(nomorJuz: nomor),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => DetailJuzs(nomorJuz: nomor,),));
                 },
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
