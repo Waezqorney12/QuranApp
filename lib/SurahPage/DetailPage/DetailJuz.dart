@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:al_quran/Model/detailJuzModel.dart';
+import 'package:get/get.dart';
+import 'package:just_audio/just_audio.dart';
 
 class DetailJuzs extends StatelessWidget {
   dynamic nomorJuz;
@@ -73,31 +75,200 @@ class DetailJuzs extends StatelessWidget {
                 backgroundColor: PaletWarna.background,
                 body: ListView.separated(
                     itemBuilder: (context, index) {
+                      Id id = Id.fromJson(detailVerses[index]["tafsir"]["id"]);
                       Texts texts = Texts.fromJson(detailVerses[index]["text"]);
                       Transliteration transliteration =
                           Transliteration.fromJson(
                               detailVerses[index]["text"]["transliteration"]);
                       Numbers numbers =
                           Numbers.fromJson(detailVerses[index]["number"]);
-                      Translation translation = Translation.fromJson(detailVerses[index]["translation"]);
+                      Translation translation = Translation.fromJson(
+                          detailVerses[index]["translation"]);
+
                       return GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           showModalBottomSheet(
-                            context: context, 
-                            backgroundColor: PaletWarna.backgroundNavigation,
-                            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+                            context: context,
+                            backgroundColor: PaletWarna.navigation,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10))),
                             builder: (context) {
-                            return SizedBox(
-                              height: 400,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [],
-                                  )
-                                ],
-                              ),
-                            );
-                          },);
+                              return SizedBox(
+                                height: 400,
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Positioned(
+                                        top: -30,
+                                        left: 50,
+                                        right: 50,
+                                        child: Container(
+                                          height: Dimensions.height50(context),
+                                          width: Dimensions.widht50(context),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: PaletWarna.unguTuaTerang),
+                                          child: Center(
+                                            child: poppinText(
+                                                context,
+                                                "Page: ${detailVerses[index]["meta"]["page"]}",
+                                                FontWeight.bold,
+                                                20,
+                                                PaletWarna.putihTeks,
+                                                20),
+                                          ),
+                                        )),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical:
+                                              Dimensions.height40(context)),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: Dimensions.widht10(
+                                                    context)),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  size: 30,
+                                                  Icons.play_arrow_outlined,
+                                                  color: PaletWarna.unguIcon,
+                                                ),
+                                                SizedBox(
+                                                  width: Dimensions.widht10(
+                                                      context),
+                                                ),
+                                                poppinText(
+                                                    context,
+                                                    "Play Muratal",
+                                                    FontWeight.normal,
+                                                    16,
+                                                    PaletWarna.putihTeks,
+                                                    16)
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: Dimensions.height15(
+                                                    context),
+                                                horizontal: Dimensions.widht10(
+                                                    context)),
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  size: 30,
+                                                  Icons.share_outlined,
+                                                  color: PaletWarna.unguIcon,
+                                                ),
+                                                SizedBox(
+                                                  width: Dimensions.widht10(
+                                                      context),
+                                                ),
+                                                poppinText(
+                                                    context,
+                                                    "Share Ayat",
+                                                    FontWeight.normal,
+                                                    16,
+                                                    PaletWarna.putihTeks,
+                                                    16)
+                                              ],
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                  title: Title(
+                                                      color:
+                                                          PaletWarna.background,
+                                                      child: poppinText(
+                                                          context,
+                                                          "Tafsir Ayat: ${numbers.inSurah}",
+                                                          FontWeight.bold,
+                                                          16,
+                                                          PaletWarna.background,
+                                                          16)),
+                                                  content: SizedBox(
+                                                      height: Dimensions.height450(context),
+                                                      width: Dimensions.widht315(context),
+                                                      child: ListView(
+                                                        scrollDirection:
+                                                            Axis.vertical,
+                                                        children: [
+                                                          poppinText(
+                                                              context,
+                                                              id.long,
+                                                              FontWeight.normal,
+                                                              16,
+                                                              PaletWarna
+                                                                  .background,
+                                                              16),
+                                                        ],
+                                                      )),
+                                                  actions: [
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: poppinText(
+                                                            context,
+                                                            "Close",
+                                                            FontWeight.bold,
+                                                            16,
+                                                            PaletWarna
+                                                                .background,
+                                                            16)),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Dimensions.widht10(
+                                                          context)),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    size: 30,
+                                                    Icons.book_outlined,
+                                                    color: PaletWarna.unguIcon,
+                                                  ),
+                                                  SizedBox(
+                                                    width: Dimensions.widht10(
+                                                        context),
+                                                  ),
+                                                  poppinText(
+                                                      context,
+                                                      "Tafsir Ayat",
+                                                      FontWeight.normal,
+                                                      16,
+                                                      PaletWarna.putihTeks,
+                                                      16)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
                         },
                         child: Padding(
                           padding: EdgeInsets.only(
@@ -121,13 +292,16 @@ class DetailJuzs extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.symmetric(horizontal: Dimensions.widht20(context)),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal:
+                                              Dimensions.widht20(context)),
                                       child: Container(
                                         width: Dimensions.widht36(context),
                                         height: Dimensions.height36(context),
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: PaletWarna.unguTuaTerang.withOpacity(.7),
+                                          color: PaletWarna.unguTuaTerang
+                                              .withOpacity(.7),
                                         ),
                                         child: Center(
                                           child: poppinText(
@@ -141,12 +315,13 @@ class DetailJuzs extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    
                                     Expanded(
-                                      child: Column(
-                                        children: [
+                                      child: Column(children: [
                                         Padding(
-                                          padding: EdgeInsets.only(top: Dimensions.height15(context),right: Dimensions.widht15(context)),
+                                          padding: EdgeInsets.only(
+                                              top: Dimensions.height15(context),
+                                              right:
+                                                  Dimensions.widht15(context)),
                                           child: Align(
                                             alignment: Alignment.centerRight,
                                             child: poppinText(
@@ -160,20 +335,25 @@ class DetailJuzs extends StatelessWidget {
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.symmetric(vertical: Dimensions.height15(context)),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical:
+                                                  Dimensions.height15(context)),
                                           child: SizedBox(
-                                              width: Dimensions.widht326(context),
-                                              child: poppinText(
-                                                  context,
-                                                  transliteration.en.toString(),
-                                                  FontWeight.normal,
-                                                  16,
-                                                  PaletWarna.unguMuda.withOpacity(.85),
-                                                  16),
-                                                  ),
+                                            width: Dimensions.widht326(context),
+                                            child: poppinText(
+                                                context,
+                                                transliteration.en.toString(),
+                                                FontWeight.normal,
+                                                16,
+                                                PaletWarna.unguMuda
+                                                    .withOpacity(.85),
+                                                16),
+                                          ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.only(bottom: Dimensions.height15(context)),
+                                          padding: EdgeInsets.only(
+                                              bottom:
+                                                  Dimensions.height15(context)),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: poppinText(
@@ -205,5 +385,48 @@ class DetailJuzs extends StatelessWidget {
                     itemCount: detailJuz.totalVerses)));
       },
     );
+  }
+
+  Future<void> _playAudio(
+    String? audioUrl,
+  ) async {
+    AudioPlayer player = AudioPlayer();
+    if (audioUrl != null) {
+      try {
+        await player.setUrl(audioUrl);
+        await player.play();
+      } on PlayerException catch (e) {
+        Get.defaultDialog(
+          title: "Error",
+          middleText: "Error tidak diketahui ${e.message}",
+        );
+      } on PlayerInterruptedException catch (e) {
+        Get.defaultDialog(
+          title: "Error",
+          middleText: "Error tidak diketahui ${e.message}",
+        );
+      } catch (e) {
+        Get.defaultDialog(
+          title: "Error",
+          middleText: "Error tidak diketahui $e",
+        );
+      }
+
+      // Catching errors during playback (e.g. lost network connection)
+      player.playbackEventStream.listen((event) {},
+          onError: (Object e, StackTrace st) {
+        if (e is PlayerException) {
+          Get.defaultDialog(
+            title: "Error",
+            middleText: "Error tidak diketahui ${e.message}",
+          );
+        } else {
+          Get.defaultDialog(
+            title: "Error",
+            middleText: "Error tidak diketahui $e",
+          );
+        }
+      });
+    }
   }
 }
