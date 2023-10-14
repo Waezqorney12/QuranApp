@@ -47,7 +47,6 @@ class _SholatState extends State<Sholat> {
     // TODO: implement initState
     super.initState();
     loadDone();
-
     setState(() {
       dates;
       time;
@@ -64,7 +63,7 @@ class _SholatState extends State<Sholat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarClass(),
+      appBar: AppBarClass(teks: "Sholat Page",),
       drawer: const DrawerClass(),
       backgroundColor: PaletWarna.background,
       body: DefaultTabController(

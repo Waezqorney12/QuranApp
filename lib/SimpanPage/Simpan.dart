@@ -16,7 +16,7 @@ class _SimpanState extends State<Simpan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarClass(),
+      appBar: AppBarClass(teks: "Save Page",),
       drawer: const DrawerClass(),
       backgroundColor: PaletWarna.background,
       

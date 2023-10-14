@@ -7,7 +7,8 @@ import '../library_asset/color.dart';
 import '../library_asset/dimensions.dart';
 
 class AppBarClass extends StatefulWidget implements PreferredSizeWidget {
-  const AppBarClass({super.key});
+  String teks;
+  AppBarClass({super.key,required this.teks});
 
   @override
   State<AppBarClass> createState() => _AppBarClassState();
@@ -23,6 +24,7 @@ class _AppBarClassState extends State<AppBarClass> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      
       toolbarHeight: Dimensions.height80(context),
       elevation: 0,
       backgroundColor: PaletWarna.background,
@@ -41,7 +43,7 @@ class _AppBarClassState extends State<AppBarClass> {
       title: Padding(
         padding: EdgeInsets.only(left: Dimensions.widht24(context)),
         child: Text(
-          "Quran App",
+          widget.teks,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.bold,
             fontSize: 20,

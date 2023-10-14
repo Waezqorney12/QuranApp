@@ -178,9 +178,9 @@ class Sajda {
 }
 
 class Transliteration {
-  String en;
+  String? en;
 
-  Transliteration({required this.en});
+  Transliteration({this.en});
 
   factory Transliteration.fromJson(Map<String, dynamic> json) {
     return Transliteration(

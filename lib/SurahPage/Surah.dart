@@ -35,7 +35,7 @@ class _SurahState extends State<Surah> {
         drawer: const DrawerClass(),
 
         // APP BAR
-        appBar: AppBarClass(),
+        appBar: AppBarClass(teks: "Quran App",),
         body: DefaultTabController(
           length: 2,
           child: Padding(
