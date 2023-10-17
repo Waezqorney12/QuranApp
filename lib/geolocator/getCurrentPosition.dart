@@ -36,10 +36,12 @@ Future<Position>  getCurrentLocation() async{
         String administrativeArea = placemark.administrativeArea ?? "Tidak Diketahui";
         String locality= placemark.locality ?? "Tidak Diketahui";
         String street = placemark.street ?? " Tidak Diketahui ";
+        String country = placemark.country ?? " Tidak Diketahui ";
         return {
           "administrativeArea" :administrativeArea,
           "locality" :locality,
-          "street" : street
+          "street" : street,
+          "country" : country
         };
       }
     } catch (e) {

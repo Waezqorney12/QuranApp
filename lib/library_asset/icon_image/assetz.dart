@@ -19,6 +19,8 @@ class assetDart{
   static const String splashKetiga = "assets/svg/LogoQuran.svg";
 
   static const String gambarHadist = "assets/png/Bewarna/HadistColor.png";
-  
+  static const String compass = "assets/png/Bewarna/compassColor.png";
+  static const String search = "assets/png/TidakBewarna/Search.png";
+  static const String compassNocolor = "assets/png/TidakBewarna/compassNoColor.png";
 
 }

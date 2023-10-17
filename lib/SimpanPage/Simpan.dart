@@ -1,6 +1,7 @@
 import 'package:al_quran/AppBar/AppBar.dart';
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/library_asset/color.dart';
+import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';

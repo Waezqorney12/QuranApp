@@ -3,7 +3,7 @@ import 'package:al_quran/Model/namaJuzModel.dart';
 import 'package:al_quran/SurahPage/DetailPage/DetailJuz.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
-import 'package:al_quran/library_asset/icon/assetz.dart';
+import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';

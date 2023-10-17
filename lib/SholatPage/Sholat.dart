@@ -4,13 +4,14 @@ import 'package:al_quran/SholatPage/ListSholat/ListNiatDoa.dart';
 import 'package:al_quran/SholatPage/ListSholat/ListNiat.dart';
 import 'package:al_quran/SholatPage/ListSholat/ListNiatSholat.dart';
 import 'package:al_quran/SholatPage/ListSholat/ListHadist.dart';
+import 'package:al_quran/SholatPage/compass.dart';
 import 'package:al_quran/geolocator/getCurrentPosition.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-import 'package:al_quran/library_asset/icon/assetz.dart';
+import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:adhan_dart/adhan_dart.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
@@ -28,6 +29,7 @@ class _SholatState extends State<Sholat> {
   String pronvisi = "";
   String kecamatan = "";
   String jalan = "";
+  String negara = "";
 
   String? subuh;
   String? fajr;
@@ -63,7 +65,9 @@ class _SholatState extends State<Sholat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarClass(teks: "Sholat Page",),
+      appBar: AppBarClass(teks: "Sholat Page",images: assetDart.compass,voidCallback: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CompasClass(provinsi: pronvisi,negara: negara,kecamatan: kecamatan,),));
+      }),
       drawer: const DrawerClass(),
       backgroundColor: PaletWarna.background,
       body: DefaultTabController(
@@ -80,10 +84,9 @@ class _SholatState extends State<Sholat> {
                     ),
                     SliverAppBar(
                       shape: Border(
-                          bottom: BorderSide(
-                              color: Colors.grey.withOpacity(.3), width: 2),
-                          top: BorderSide(
-                              color: Colors.grey.withOpacity(.3), width: 2)),
+                          bottom: BorderSide( color: Colors.grey.withOpacity(.3), width: 2 ),
+                          top: BorderSide( color: Colors.grey.withOpacity(.3), width: 2 ),
+                          ),
                       pinned: true,
                       backgroundColor: PaletWarna.background,
                       automaticallyImplyLeading: false,
@@ -93,11 +96,9 @@ class _SholatState extends State<Sholat> {
                               unselectedLabelColor: Colors.grey.withOpacity(.5),
                               indicatorColor: PaletWarna.unguIcon,
                               tabs: [
-                                _tabs(context, "Sholat Wajib", FontWeight.w600,
-                                    16, 16),
+                                _tabs(context, "Sholat Wajib", FontWeight.w600, 16, 16),
                                 _tabs(context, "Niat", FontWeight.w600, 16, 16),
-                                _tabs(
-                                    context, "Hadist", FontWeight.w600, 16, 16),
+                                _tabs(context, "Hadist", FontWeight.w600, 16, 16),
                                 _tabs(context, "Doa", FontWeight.w600, 16, 16),
                               ])),
                     )
@@ -177,21 +178,9 @@ class _SholatState extends State<Sholat> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            poppinText(
-                              context,
-                              time,
-                              FontWeight.bold,
-                              12,
-                              Colors.white,
-                              12,
+                            poppinText(context,time,FontWeight.bold,12,Colors.white,12,
                             ),
-                            poppinText(
-                              context,
-                              dates,
-                              FontWeight.w400,
-                              12,
-                              Colors.white,
-                              12,
+                            poppinText(context, dates, FontWeight.w400, 12, Colors.white, 12,
                             ),
                           ],
                         ),
@@ -228,8 +217,7 @@ class _SholatState extends State<Sholat> {
                             shape: BoxShape.circle,
                             color: Colors.white,
                           ),
-                          child: Icon(Icons.place,
-                              size: 24, color: PaletWarna.unguIcon),
+                          child: Icon(Icons.place, size: 24, color: PaletWarna.unguIcon),
                         ),
                       ),
                       Expanded(
@@ -238,33 +226,10 @@ class _SholatState extends State<Sholat> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    height: Dimensions.height5(context),
-                                  ),
-                                  poppinText(
-                                    context,
-                                    pronvisi,
-                                    FontWeight.bold,
-                                    12,
-                                    PaletWarna.unguTua,
-                                    12,
-                                  ),
-                                  poppinText(
-                                    context,
-                                    kecamatan,
-                                    FontWeight.w500,
-                                    10,
-                                    Colors.white,
-                                    10,
-                                  ),
-                                  poppinText(
-                                    context,
-                                    jalan,
-                                    FontWeight.w400,
-                                    10,
-                                    Colors.white,
-                                    10,
-                                  ),
+                                  SizedBox(height: Dimensions.height5(context),),
+                                  poppinText(context, pronvisi, FontWeight.bold, 12, PaletWarna.unguTua, 12,),
+                                  poppinText(context, kecamatan, FontWeight.w500, 10, Colors.white, 10,),
+                                  poppinText(context, jalan, FontWeight.w400, 10, Colors.white, 10,),
                                 ],
                               )
                             : Center(
@@ -371,24 +336,12 @@ class _SholatState extends State<Sholat> {
         PrayerTimes(coordinates, date, params, precision: true);
 
     setState(() {
-      subuh = DateFormat("hh:mm a")
-          .format(tz.TZDateTime.from(prayerTimes.fajrafter!, location))
-          .toString();
-      fajr = DateFormat("hh:mm a")
-          .format(tz.TZDateTime.from(prayerTimes.fajr!, location))
-          .toString();
-      dzuhur = DateFormat("hh:mm a")
-          .format(tz.TZDateTime.from(prayerTimes.dhuhr!, location))
-          .toString();
-      ashar = DateFormat("hh:mm a")
-          .format(tz.TZDateTime.from(prayerTimes.asr!, location))
-          .toString();
-      maghrib = DateFormat("hh:mm a")
-          .format(tz.TZDateTime.from(prayerTimes.maghrib!, location))
-          .toString();
-      isya = DateFormat("hh:mm a")
-          .format(tz.TZDateTime.from(prayerTimes.isha!, location))
-          .toString();
+      subuh = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.fajrafter!, location)).toString();
+      fajr = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.fajr!, location)).toString();
+      dzuhur = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.dhuhr!, location)).toString();
+      ashar = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.asr!, location)).toString();
+      maghrib = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.maghrib!, location)).toString();
+      isya = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.isha!, location)).toString();
     });
   }
 
@@ -407,6 +360,8 @@ class _SholatState extends State<Sholat> {
         pronvisi = kabupatenAwal["administrativeArea"] ?? " Data Kosong ";
         kecamatan = kabupatenAwal["locality"] ?? " Data Kosong ";
         jalan = kabupatenAwal["street"] ?? "Data Kosong";
+        negara = kabupatenAwal["country"] ?? "Data Kosong";
+        
       });
     } catch (e) {
       throw 'Terjadi error yaitu $e';

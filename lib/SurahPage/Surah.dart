@@ -1,14 +1,13 @@
 import 'package:al_quran/AppBar/AppBar.dart';
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/SurahPage/ListJuz.dart';
-
 import 'package:al_quran/SurahPage/listSurah.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
-import 'package:al_quran/library_asset/icon/assetz.dart';
+import 'package:al_quran/library_asset/icon_image/assetz.dart';
 
 class Surah extends StatefulWidget {
   const Surah({super.key});
@@ -35,7 +34,8 @@ class _SurahState extends State<Surah> {
         drawer: const DrawerClass(),
 
         // APP BAR
-        appBar: AppBarClass(teks: "Quran App",),
+        appBar: AppBarClass(
+          teks: "Quran App", ),
         body: DefaultTabController(
           length: 2,
           child: Padding(

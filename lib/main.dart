@@ -1,8 +1,10 @@
+import 'package:al_quran/AsmaulHusna.dart';
 import 'package:al_quran/Dashboard.dart';
 import 'package:al_quran/SurahPage/DetailPage/DetailSurah.dart';
+
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
-import 'package:al_quran/library_asset/icon/assetz.dart';
+import 'package:al_quran/library_asset/icon_image/assetz.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
       home: showHome ? const Dashboard() : const SplashScreen(),
       routes: <String, WidgetBuilder>{
         '/dashboard': (BuildContext context) => const Dashboard(),
+        '/asmaulhusna' : (BuildContext context) => const AsmaulHusnaPage()
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:al_quran/Model/asmaulHusnaModel.dart';
 import 'package:al_quran/Model/bacaanDoaModel.dart';
 import 'package:al_quran/Model/bacaanNiatModel.dart';
 import 'package:al_quran/Model/bacaanSholatModel.dart';
@@ -11,8 +12,10 @@ import 'package:al_quran/Model/namaJuzModel.dart';
 import 'package:al_quran/Model/tokohHadistModel.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:al_quran/Model/listTafsirModel.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 
 class ServiceClass {
@@ -132,6 +135,25 @@ class ServiceClass {
 
   Map<String, dynamic> parseData = (jsonDecode(data.body) as Map<String, dynamic>)["data"];
   return DetailJuz.fromJson(parseData);
+}
+
+  Future  getAsmaulHusna() async {
+    
+    final url = await http.get(Uri.parse("https://asmaul-husna-api.vercel.app/api/all"));
+    List parse = jsonDecode(url.body)["data"];
+    
+    return parse;
+  // List<AsmaulHusna> dataKita = [];
+  // final url = await rootBundle.loadString("assets/datas/asmaulHusna.json");
+
+  // List data = jsonDecode(url);
+  // print(data);
+  // data.map((e) => {
+  //   dataKita.add(AsmaulHusna.fromJson(e))
+  // }).toList();
+
+  // return dataKita;
+
 }
 
 }

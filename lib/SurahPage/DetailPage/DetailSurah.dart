@@ -431,7 +431,9 @@ class _DetailSurahState extends State<DetailSurah> {
         ),
         IconButton(
           icon: const Icon(Icons.stop_rounded),
-          onPressed: () {},
+          onPressed: () {
+            _stopAudio(surah.audioFull["05"]);
+          },
         ),
       ],
     );

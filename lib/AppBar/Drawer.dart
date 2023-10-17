@@ -19,40 +19,18 @@ Drawer drawerSurah(BuildContext context) {
     backgroundColor: PaletWarna.background,
     child: ListView(children: [
       listIcon(context, Icons.menu_book_rounded, "Hadis Pilihan"),
-      listIcon(context, Icons.book, "Tafsir Al Qur'an"),
-      ListTile(
-        shape: Border(bottom: BorderSide(color: Colors.grey.withOpacity(.2))),
-        title: InkWell(
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 24),
-                child: SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: Image.asset("assets/png/Bewarna/DoaColor.png"),
-                ),
-              ),
-              Expanded(
-                child: poppinText(context, "Doa-doa Al Qur'an", FontWeight.w500,
-                    16, PaletWarna.unguTeks.withOpacity(0.8), 16),
-              ),
-            ],
-          ),
-        ),
-      ),
-      // Tentang Aplikasi
+      listIcon(context, Icons.book, "Asmaul Husna" , voidCallback: ()=> Navigator.pushReplacementNamed(context, '/asmaulhusna')),
       listIcon(context, Icons.info_outline_rounded, "Tentang Aplikasi"),
       listIcon(context, Icons.call, "Hubungi Kami"),
     ]),
   );
 }
 
-ListTile listIcon(BuildContext context, IconData icon, String teks) {
+ListTile listIcon(BuildContext context, IconData icon, String teks, {VoidCallback? voidCallback}) {
   return ListTile(
     shape: Border(bottom: BorderSide(color: Colors.grey.withOpacity(.2))),
     title: InkWell(
-      onTap: () {},
+      onTap: voidCallback,
       child: Row(
         children: [
           Padding(

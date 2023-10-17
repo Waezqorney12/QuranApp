@@ -2,7 +2,7 @@ import 'package:al_quran/Service/ServiceClass.dart';
 import 'package:al_quran/SurahPage/DetailPage/DetailSurah.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
-import 'package:al_quran/library_asset/icon/assetz.dart';
+import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';

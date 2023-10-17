@@ -8,7 +8,10 @@ import '../library_asset/dimensions.dart';
 
 class AppBarClass extends StatefulWidget implements PreferredSizeWidget {
   String teks;
-  AppBarClass({super.key,required this.teks});
+  String? images;
+  VoidCallback? voidCallback;
+  Widget? widgets;
+  AppBarClass({super.key,required this.teks, this.images, this.voidCallback, this.widgets});
 
   @override
   State<AppBarClass> createState() => _AppBarClassState();
@@ -24,22 +27,23 @@ class _AppBarClassState extends State<AppBarClass> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      
       toolbarHeight: Dimensions.height80(context),
       elevation: 0,
       backgroundColor: PaletWarna.background,
       actions: [
-        Padding(
-          padding: EdgeInsets.only(
-            right: Dimensions.widht24(context),
+         if (widget.images != null) // Periksa apakah widget.images tidak null
+          Padding(
+            padding: EdgeInsets.only(
+              right: Dimensions.widht24(context),
+            ),
+            child: IconButton(
+              iconSize: 24,
+              onPressed: widget.voidCallback,
+              icon: Image.asset(widget.images!),
+            ),
           ),
-          child: IconButton(
-            iconSize: 24,
-            onPressed: () {},
-            icon: Image.asset("assets/png/TidakBewarna/Search.png"),
-          ),
-        ),
       ],
+      leading: widget.widgets,
       title: Padding(
         padding: EdgeInsets.only(left: Dimensions.widht24(context)),
         child: Text(
