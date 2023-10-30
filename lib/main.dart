@@ -1,13 +1,12 @@
 import 'package:al_quran/AsmaulHusna.dart';
 import 'package:al_quran/Dashboard.dart';
-import 'package:al_quran/SurahPage/DetailPage/DetailSurah.dart';
-
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:al_quran/library_asset/icon_image/assetz.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+// ignore: unused_import
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';

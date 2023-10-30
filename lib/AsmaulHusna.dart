@@ -1,13 +1,11 @@
 
 
 import 'package:al_quran/AppBar/AppBar.dart';
-import 'package:al_quran/Model/asmaulHusnaModel.dart';
 import 'package:al_quran/Service/ServiceClass.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AsmaulHusnaPage extends StatelessWidget {

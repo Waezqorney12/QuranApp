@@ -13,6 +13,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:adhan_dart/adhan_dart.dart';
+import 'package:provider/provider.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -41,74 +42,91 @@ class _SholatState extends State<Sholat> {
   double latitude = 0;
   double langitude = 0;
 
-  final dates = DateFormat("EEEEE, dd MMM yyyy").format(DateTime.now());
-  final time = DateFormat("hh:mm a").format(DateTime.now());
+  Stream<ModelTime> getTime() {
+    return Stream.periodic(const Duration(seconds: 1), (count) {
+      return ModelTime(
+        time: DateFormat("hh:mm:ss a").format(DateTime.now()), date: DateFormat("EEEEE, dd MMM yyyy").format(DateTime.now()));
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     loadDone();
-    setState(() {
-      dates;
-      time;
-    });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
+    getTime();
     
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarClass(teks: "Sholat Page",images: assetDart.compass,voidCallback: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CompasClass(provinsi: pronvisi,negara: negara,kecamatan: kecamatan,),));
-      }),
-      drawer: const DrawerClass(),
-      backgroundColor: PaletWarna.background,
-      body: DefaultTabController(
-        length: 4,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimensions.widht20(context),
-            vertical: Dimensions.height15(context),
-          ),
-          child: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                    SliverToBoxAdapter(
-                      child: _boxJadwal(context),
+    return StreamProvider<ModelTime>(
+      create: (_) => getTime(),
+      initialData: ModelTime(time: "00:00 AM", date: "1 January 2023"),
+      child: Scaffold(
+        appBar: AppBarClass(
+            teks: "Sholat Page",
+            images: assetDart.compass,
+            voidCallback: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CompasClass(
+                      provinsi: pronvisi,
+                      negara: negara,
+                      kecamatan: kecamatan,
                     ),
-                    SliverAppBar(
-                      shape: Border(
-                          bottom: BorderSide( color: Colors.grey.withOpacity(.3), width: 2 ),
-                          top: BorderSide( color: Colors.grey.withOpacity(.3), width: 2 ),
-                          ),
-                      pinned: true,
-                      backgroundColor: PaletWarna.background,
-                      automaticallyImplyLeading: false,
-                      bottom: PreferredSize(
-                          preferredSize: const Size.fromHeight(0),
-                          child: TabBar(
-                              unselectedLabelColor: Colors.grey.withOpacity(.5),
-                              indicatorColor: PaletWarna.unguIcon,
-                              tabs: [
-                                _tabs(context, "Sholat Wajib", FontWeight.w600, 16, 16),
-                                _tabs(context, "Niat", FontWeight.w600, 16, 16),
-                                _tabs(context, "Hadist", FontWeight.w600, 16, 16),
-                                _tabs(context, "Doa", FontWeight.w600, 16, 16),
-                              ])),
-                    )
-                  ],
-              body: const TabBarView(children: [
-                ListNiatSholat(),
-                ListNiat(),
-                ListHadist(),
-                ListNiatDoa()
-              ])),
+                  ));
+            }),
+        drawer: const DrawerClass(),
+        backgroundColor: PaletWarna.background,
+        body: DefaultTabController(
+          length: 4,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.widht20(context),
+              vertical: Dimensions.height15(context),
+            ),
+            child: NestedScrollView(
+                headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                      SliverToBoxAdapter(
+                        child: _boxJadwal(context),
+                      ),
+                      SliverAppBar(
+                        shape: Border(
+                          bottom: BorderSide(
+                              color: Colors.grey.withOpacity(.3), width: 2),
+                          top: BorderSide(
+                              color: Colors.grey.withOpacity(.3), width: 2),
+                        ),
+                        pinned: true,
+                        backgroundColor: PaletWarna.background,
+                        automaticallyImplyLeading: false,
+                        bottom: PreferredSize(
+                            preferredSize: const Size.fromHeight(0),
+                            child: TabBar(
+                                unselectedLabelColor:
+                                    Colors.grey.withOpacity(.5),
+                                indicatorColor: PaletWarna.unguIcon,
+                                tabs: [
+                                  _tabs(context, "Sholat Wajib",
+                                      FontWeight.w600, 16, 16),
+                                  _tabs(
+                                      context, "Niat", FontWeight.w600, 16, 16),
+                                  _tabs(context, "Hadist", FontWeight.w600, 16,
+                                      16),
+                                  _tabs(
+                                      context, "Doa", FontWeight.w600, 16, 16),
+                                ])),
+                      )
+                    ],
+                body: const TabBarView(children: [
+                  ListNiatSholat(),
+                  ListNiat(),
+                  ListHadist(),
+                  ListNiatDoa()
+                ])),
+          ),
         ),
       ),
     );
@@ -178,9 +196,9 @@ class _SholatState extends State<Sholat> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            poppinText(context,time,FontWeight.bold,12,Colors.white,12,
+                            poppinText(context,context.watch<ModelTime>().time!,FontWeight.bold,12,Colors.white,12,
                             ),
-                            poppinText(context, dates, FontWeight.w400, 12, Colors.white, 12,
+                            poppinText(context,context.watch<ModelTime>().date!,FontWeight.w400,12,Colors.white,12,
                             ),
                           ],
                         ),
@@ -217,7 +235,8 @@ class _SholatState extends State<Sholat> {
                             shape: BoxShape.circle,
                             color: Colors.white,
                           ),
-                          child: Icon(Icons.place, size: 24, color: PaletWarna.unguIcon),
+                          child: Icon(Icons.place,
+                              size: 24, color: PaletWarna.unguIcon),
                         ),
                       ),
                       Expanded(
@@ -226,10 +245,15 @@ class _SholatState extends State<Sholat> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: Dimensions.height5(context),),
-                                  poppinText(context, pronvisi, FontWeight.bold, 12, PaletWarna.unguTua, 12,),
-                                  poppinText(context, kecamatan, FontWeight.w500, 10, Colors.white, 10,),
-                                  poppinText(context, jalan, FontWeight.w400, 10, Colors.white, 10,),
+                                  SizedBox(
+                                    height: Dimensions.height5(context),
+                                  ),
+                                  poppinText(context,pronvisi,FontWeight.bold,12,PaletWarna.unguTua,12,
+                                  ),
+                                  poppinText(context,kecamatan,FontWeight.w500,10,Colors.white,10,
+                                  ),
+                                  poppinText(context,jalan,FontWeight.w400,10,Colors.white,10,
+                                  ),
                                 ],
                               )
                             : Center(
@@ -318,10 +342,8 @@ class _SholatState extends State<Sholat> {
   void getSholatTime() async {
     Position position = await getCurrentLocation();
     setState(() {
-      
-        latitude = position.latitude;
-        langitude = position.longitude;
-      
+      latitude = position.latitude;
+      langitude = position.longitude;
     });
     tz.initializeTimeZones();
 
@@ -336,12 +358,24 @@ class _SholatState extends State<Sholat> {
         PrayerTimes(coordinates, date, params, precision: true);
 
     setState(() {
-      subuh = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.fajrafter!, location)).toString();
-      fajr = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.fajr!, location)).toString();
-      dzuhur = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.dhuhr!, location)).toString();
-      ashar = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.asr!, location)).toString();
-      maghrib = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.maghrib!, location)).toString();
-      isya = DateFormat("hh:mm a").format(tz.TZDateTime.from(prayerTimes.isha!, location)).toString();
+      subuh = DateFormat("hh:mm a")
+          .format(tz.TZDateTime.from(prayerTimes.fajrafter!, location))
+          .toString();
+      fajr = DateFormat("hh:mm a")
+          .format(tz.TZDateTime.from(prayerTimes.fajr!, location))
+          .toString();
+      dzuhur = DateFormat("hh:mm a")
+          .format(tz.TZDateTime.from(prayerTimes.dhuhr!, location))
+          .toString();
+      ashar = DateFormat("hh:mm a")
+          .format(tz.TZDateTime.from(prayerTimes.asr!, location))
+          .toString();
+      maghrib = DateFormat("hh:mm a")
+          .format(tz.TZDateTime.from(prayerTimes.maghrib!, location))
+          .toString();
+      isya = DateFormat("hh:mm a")
+          .format(tz.TZDateTime.from(prayerTimes.isha!, location))
+          .toString();
     });
   }
 
@@ -349,7 +383,6 @@ class _SholatState extends State<Sholat> {
     try {
       Position position = await getCurrentLocation();
       setState(() {
-        
         latitude = position.latitude;
         langitude = position.longitude;
       });
@@ -361,10 +394,15 @@ class _SholatState extends State<Sholat> {
         kecamatan = kabupatenAwal["locality"] ?? " Data Kosong ";
         jalan = kabupatenAwal["street"] ?? "Data Kosong";
         negara = kabupatenAwal["country"] ?? "Data Kosong";
-        
       });
     } catch (e) {
       throw 'Terjadi error yaitu $e';
     }
   }
+}
+
+class ModelTime{
+  String? time;
+  String? date;
+  ModelTime({required this.time,required this.date});
 }

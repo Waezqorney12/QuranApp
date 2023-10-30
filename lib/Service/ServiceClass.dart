@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:al_quran/Model/asmaulHusnaModel.dart';
 import 'package:al_quran/Model/bacaanDoaModel.dart';
 import 'package:al_quran/Model/bacaanNiatModel.dart';
 import 'package:al_quran/Model/bacaanSholatModel.dart';
@@ -11,11 +10,8 @@ import 'package:al_quran/Model/listSurahModel.dart';
 import 'package:al_quran/Model/namaJuzModel.dart';
 import 'package:al_quran/Model/tokohHadistModel.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:al_quran/Model/listTafsirModel.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 
 class ServiceClass {

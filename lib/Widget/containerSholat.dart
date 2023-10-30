@@ -4,10 +4,10 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 class ContainerSholat extends StatelessWidget {
   final Widget child;
-  final double? widht;
-  final double? height;
-  final Decoration? decoration;
-  const ContainerSholat({super.key, required this.child, this.widht, this.height, this.decoration});
+  final double widht;
+  final double height;
+  final BoxDecoration decoration;
+  const ContainerSholat({super.key, required this.child, required this.widht, required this.height, required this.decoration});
 
   @override
   Widget build(BuildContext context) {

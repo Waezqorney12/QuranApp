@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../library_asset/color.dart';
 import '../library_asset/dimensions.dart';
 
 class AppBarClass extends StatefulWidget implements PreferredSizeWidget {
-  String teks;
-  String? images;
-  VoidCallback? voidCallback;
-  Widget? widgets;
-  AppBarClass({super.key,required this.teks, this.images, this.voidCallback, this.widgets});
+  final String teks;
+  final String? images;
+  final VoidCallback? voidCallback;
+  final Widget? widgets;
+  const AppBarClass({super.key,required this.teks, this.images, this.voidCallback, this.widgets});
 
   @override
   State<AppBarClass> createState() => _AppBarClassState();

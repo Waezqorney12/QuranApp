@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:math' as math;
 
 import 'package:al_quran/AppBar/AppBar.dart';
