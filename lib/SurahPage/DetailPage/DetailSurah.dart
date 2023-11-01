@@ -1,20 +1,17 @@
-import 'dart:convert';
-
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/Model/detailSurahModel.dart';
+import 'package:al_quran/Model/listSurahModel.dart';
 import 'package:al_quran/Service/ServiceClass.dart';
+import 'package:al_quran/Service/SongService.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:just_audio/just_audio.dart';
-import 'package:logger/logger.dart';
-import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class DetailSurah extends StatefulWidget {
-  late  int? nomorSurah;
+  late int? nomorSurah;
 
   DetailSurah({
     Key? key,
@@ -28,9 +25,7 @@ class DetailSurah extends StatefulWidget {
 class _DetailSurahState extends State<DetailSurah> {
 // Inisialisasi status pemutaran audio
   final player = AudioPlayer();
-
-  
-  
+  bool sebelum = false;
 
   @override
   void dispose() {
@@ -40,8 +35,6 @@ class _DetailSurahState extends State<DetailSurah> {
 
   @override
   Widget build(BuildContext context) {
-    final logger = Logger();
-
     return FutureBuilder<DetailClass>(
       future: ServiceClass().getDetailSurah(nomor: widget.nomorSurah),
       builder: (context, snapshot) {
@@ -73,13 +66,7 @@ class _DetailSurahState extends State<DetailSurah> {
 
         // Data berhasil diambil, lanjutkan dengan menampilkan konten
         DetailClass surah = snapshot.data!;
-        if (surah.suratSebelumnya is SuratSenya &&
-            surah.suratSelanjutnya is SuratSenya) {
-          final surahSebelumya = surah.suratSebelumnya as SuratSenya;
-          final nomorSurahSebelumnya = surahSebelumya.nomor;
-          final surahSelanjutnya = surah.suratSelanjutnya as SuratSenya;
-          final nomorSurahSelanjutnya = surah.nomor;
-        }
+
         return _getAyat(context, surah);
       },
     );
@@ -87,44 +74,57 @@ class _DetailSurahState extends State<DetailSurah> {
 
   Scaffold _getAyat(BuildContext context, DetailClass surah) {
     return Scaffold(
-      bottomNavigationBar:
-          PreferredSize(
-            preferredSize: const Size.fromHeight(0),
-            child: Material(
-              elevation: 3,
-              child: Container(
-                height: Dimensions.height50(context),
-                width: MediaQuery.of(context).size.width,
-                color: PaletWarna.backgroundNavigation,
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: (){
+      bottomNavigationBar: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: Material(
+            elevation: 3,
+            child: Container(
+              height: Dimensions.height50(context),
+              width: MediaQuery.of(context).size.width,
+              color: PaletWarna.backgroundNavigation,
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: (surah.suratSebelumnya is bool)? (){} : () {
+                      setState(() {
+                        if (surah.suratSebelumnya is Map<String, dynamic>) {
+                          final surahSebelumnya =
+                              SuratSenya.fromJson(surah.suratSebelumnya);
+                          final nomorSurahSebelumnya = surahSebelumnya.nomor;
+                          widget.nomorSurah = nomorSurahSebelumnya;
+                        } 
+                      });
+                    },
+                    child: (surah.suratSebelumnya is bool) 
+                    ? const SizedBox() 
+                    : const Icon(Icons.arrow_left,color: Colors.white,size: 40,),
+                  ),
+
+                  const Spacer(),
+
+                  InkWell(
+                      onTap: (surah.suratSelanjutnya is bool) 
+                      ? (){} 
+                      : () {
                         setState(() {
-                          if (surah.suratSebelumnya["nomor"] < 1) {
-                            surah.suratSebelumnya = 0;
-                            widget.nomorSurah = 1;
-                          } else {
-                            widget.nomorSurah = surah.suratSebelumnya["nomor"] ;
-                          player.dispose();
-                          }
-                          
+                        if (surah.suratSelanjutnya is Map<String, dynamic>) {
+                          final surahSelanjutnya = SuratSenya.fromJson(surah.suratSelanjutnya);
+                          final nomorSurahSelanjutnya = surahSelanjutnya.nomor;
+                          widget.nomorSurah = nomorSurahSelanjutnya;
+                        } 
                         });
                       },
-                      child: const Icon(Icons.arrow_left,color: Colors.white,size:40,)),
-                    const Spacer(),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          widget.nomorSurah = surah.suratSelanjutnya["nomor"] ;
-                          player.dispose();
-                        });
-                      },
-                      child: const Icon(Icons.arrow_right,color: Colors.white,size:40,))
-                  ],
-                ),
+                      child: (surah.suratSelanjutnya is bool) 
+                      ? const SizedBox() 
+                      : const Icon(
+                        Icons.arrow_right,
+                        color: Colors.white,
+                        size: 40,
+                      ))
+                ],
               ),
-            )),
+            ),
+          )),
       appBar: appBar(context: context, surah: surah),
       backgroundColor: PaletWarna.background,
       body: Center(
@@ -145,12 +145,9 @@ class _DetailSurahState extends State<DetailSurah> {
             itemCount: surah.jumlahAyat,
             itemBuilder: (context, index) {
               final Ayat ayat = surah.ayat[index];
-              return _ayat(
-                context: context,
-                ayat: ayat,
-                surah: surah
-                // surats: surats
-              );
+              return _ayat(context: context, ayat: ayat, surah: surah
+                  // surats: surats
+                  );
             },
           ),
         ),
@@ -158,7 +155,10 @@ class _DetailSurahState extends State<DetailSurah> {
     );
   }
 
-  Padding _ayat({required BuildContext context, required Ayat ayat, required DetailClass surah}) {
+  Padding _ayat(
+      {required BuildContext context,
+      required Ayat ayat,
+      required DetailClass surah}) {
     return Padding(
       padding: EdgeInsets.only(
         right: Dimensions.widht30(context),
@@ -207,10 +207,10 @@ class _DetailSurahState extends State<DetailSurah> {
                   Icons.share_outlined,
                 ),
                 _buttonIcon(() {
-                  _playAudio(ayat.audio["05"]);
+                  Song().playAudio(ayat.audio["05"]);
                 }, Icons.play_arrow_outlined),
                 _buttonIcon(() {
-                  _stopAudio(ayat.audio["05"]);
+                  Song().stopAudio(ayat.audio["05"]);
                 }, Icons.bookmark_outline),
               ],
             ),
@@ -251,7 +251,6 @@ class _DetailSurahState extends State<DetailSurah> {
               18,
             ),
           ),
-          
         ],
       ),
     );
@@ -280,7 +279,6 @@ class _DetailSurahState extends State<DetailSurah> {
       ),
     );
   }
-  
 
   IconButton _buttonIcon(
     VoidCallback? buttonAction,
@@ -426,95 +424,16 @@ class _DetailSurahState extends State<DetailSurah> {
         IconButton(
           icon: const Icon(Icons.play_arrow_outlined),
           onPressed: () {
-            _playAudio(surah.audioFull["05"]);
+            Song().playAudio(surah.audioFull["05"]);
           },
         ),
         IconButton(
           icon: const Icon(Icons.stop_rounded),
           onPressed: () {
-            _stopAudio(surah.audioFull["05"]);
+            Song().stopAudio(surah.audioFull["05"]);
           },
         ),
       ],
     );
   }
-Future<void> _playAudio(String? audioUrl, ) async {
-    if (audioUrl != null) {
-      try {
-        await player.setUrl(audioUrl);
-        await player.play();
-      } on PlayerException catch (e) {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: "Error tidak diketahui ${e.message}",
-        );
-      } on PlayerInterruptedException catch (e) {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: "Error tidak diketahui ${e.message}",
-        );
-      } catch (e) {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: "Error tidak diketahui $e",
-        );
-      }
-
-      // Catching errors during playback (e.g. lost network connection)
-      player.playbackEventStream.listen((event) {},
-          onError: (Object e, StackTrace st) {
-        if (e is PlayerException) {
-          Get.defaultDialog(
-            title: "Error",
-            middleText: "Error tidak diketahui ${e.message}",
-          );
-        } else {
-          Get.defaultDialog(
-            title: "Error",
-            middleText: "Error tidak diketahui $e",
-          );
-        }
-      });
-    }
-  }
-  Future<void> _stopAudio(String? audioUrl, ) async {
-    if (audioUrl != null) {
-      try {
-        await player.setUrl(audioUrl);
-        await player.stop();
-      } on PlayerException catch (e) {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: "Error tidak diketahui ${e.message}",
-        );
-      } on PlayerInterruptedException catch (e) {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: "Error tidak diketahui ${e.message}",
-        );
-      } catch (e) {
-        Get.defaultDialog(
-          title: "Error",
-          middleText: "Error tidak diketahui $e",
-        );
-      }
-
-      // Catching errors during playback (e.g. lost network connection)
-      player.playbackEventStream.listen((event) {},
-          onError: (Object e, StackTrace st) {
-        if (e is PlayerException) {
-          Get.defaultDialog(
-            title: "Error",
-            middleText: "Error tidak diketahui ${e.message}",
-          );
-        } else {
-          Get.defaultDialog(
-            title: "Error",
-            middleText: "Error tidak diketahui $e",
-          );
-        }
-      });
-    }
-  }
-
 }

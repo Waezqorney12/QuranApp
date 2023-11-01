@@ -21,20 +21,13 @@ class _SurahState extends State<Surah> {
 
   @override
   Widget build(BuildContext context) {
-    // double screenWidht = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
-    // double textScale = MediaQuery.of(context).textScaleFactor;
-
-    // logger.d("Lebar: $screenWidht ");
-    // logger.d("Tinggi: $screenHeight ");
-    // logger.d("Text: $textScale");
 
     return Scaffold(
         backgroundColor: PaletWarna.background,
         drawer: const DrawerClass(),
 
         // APP BAR
-        appBar: AppBarClass(
+        appBar: const AppBarClass(
           teks: "Quran App", ),
         body: DefaultTabController(
           length: 2,

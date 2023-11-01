@@ -1,4 +1,3 @@
-
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/Model/tokohHadistModel.dart';
 import 'package:al_quran/Service/ServiceClass.dart';
@@ -216,46 +215,53 @@ class _ListHadistState extends State<ListHadist> {
                                     GestureDetector(
                                         onTap: () {
                                           setState(() {
-                                                if (nomorHadist.text.isEmpty) {
+                                            if (nomorHadist.text.isEmpty) {
                                               Fluttertoast.showToast(
                                                 msg: "Nomor tidak boleh kosong",
                                                 backgroundColor: Colors.red,
                                                 textColor: Colors.white,
                                                 toastLength: Toast.LENGTH_SHORT,
                                               );
-                                            }else if(nomorHadist.text.isNotEmpty){
-                                              int nomorParse = int.parse(nomorHadist.text);
-                                              if (nomorParse > dataTokohs[index].available) {
+                                            } else if (nomorHadist
+                                                .text.isNotEmpty) {
+                                              int nomorParse =
+                                                  int.parse(nomorHadist.text);
+                                              if (nomorParse >
+                                                  dataTokohs[index].available) {
                                                 Fluttertoast.showToast(
-                                                msg: "Nomor tidak boleh melebihi jumlah hadist",
-                                                backgroundColor: Colors.red,
-                                                textColor: Colors.white,
-                                                toastLength: Toast.LENGTH_SHORT,
-                                              );
-                                              }else{
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailHadist(
-                                                    nomorHadist: int.parse(nomorHadist.text),
-                                                    namaBuku: dataTokohs[index].id,
-                                                  ),
-                                                ));
-                                            }
+                                                  msg:
+                                                      "Nomor tidak boleh melebihi jumlah hadist",
+                                                  backgroundColor: Colors.red,
+                                                  textColor: Colors.white,
+                                                  toastLength:
+                                                      Toast.LENGTH_SHORT,
+                                                );
+                                              } else {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailHadist(
+                                                        nomorHadist: int.parse(
+                                                            nomorHadist.text),
+                                                        namaBuku:
+                                                            dataTokohs[index]
+                                                                .id,
+                                                      ),
+                                                    ));
+                                              }
                                             }
                                           });
                                         },
                                         child: ContainerSholat(
-                                          height: Dimensions.height40(context),
-                                          widht:
-                                              Dimensions.widht100(context) - 15,
-                                          decoration: BoxDecoration(
+                                          Dimensions.height40(context),
+                                          Dimensions.widht100(context) - 15,
+                                          BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                             color: Colors.white,
                                           ),
-                                          child: Center(
+                                          Center(
                                             child: poppinText(
                                                 context,
                                                 "Submit",
@@ -264,27 +270,7 @@ class _ListHadistState extends State<ListHadist> {
                                                 PaletWarna.unguTua,
                                                 14),
                                           ),
-                                        )
-                                        // Container(
-                                        //     height: Dimensions.height40(context),
-                                        //     width:Dimensions.widht100(context) - 15,
-                                        //     decoration: BoxDecoration(
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(10),
-                                        //       color: Colors.white,
-                                        //     ),
-                                        //     child:
-                                        // Center(
-                                        //       child: poppinText(
-                                        //           context,
-                                        //           "Submit",
-                                        //           FontWeight.bold,
-                                        //           14,
-                                        //           PaletWarna.unguTua,
-                                        //           14),
-                                        //     ),
-                                        //   ),
-                                        ),
+                                        )),
                                   ],
                                 )
                               ],
@@ -307,6 +293,4 @@ class _ListHadistState extends State<ListHadist> {
       ),
     );
   }
-
-  
 }

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 
 class ContainerSholat extends StatelessWidget {
   final Widget child;
-  final double widht;
   final double height;
+  final double widht;
   final BoxDecoration decoration;
-  const ContainerSholat({super.key, required this.child, required this.widht, required this.height, required this.decoration});
+  const ContainerSholat(  this.height, this.widht, this.decoration, this.child, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widht,
       height: height,
+      width: widht,
       decoration: decoration,
       child: child,
     );

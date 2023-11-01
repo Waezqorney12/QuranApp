@@ -7,7 +7,6 @@ import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 

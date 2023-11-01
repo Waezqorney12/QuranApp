@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:al_quran/Model/bacaanDoaModel.dart';
 import 'package:al_quran/Model/bacaanNiatModel.dart';
 import 'package:al_quran/Model/bacaanSholatModel.dart';
@@ -16,6 +15,7 @@ import 'package:logger/logger.dart';
 
 class ServiceClass {
   Logger log = Logger();
+
   Future<List> getServiceSholat() async {
     List dataBacaanSholat = [];
 
@@ -28,6 +28,7 @@ class ServiceClass {
 
     return dataBacaanSholat;
   }
+
 
   Future<List<NiatDoa>> getServiceNiat() async {
     List<NiatDoa> dataBacaanNiat = [];
@@ -43,6 +44,7 @@ class ServiceClass {
     return dataBacaanNiat;
   }
 
+
   Future<List<BacaanDoa>> getDoa() async {
     List<BacaanDoa> bacaanDoas = [];
 
@@ -56,6 +58,7 @@ class ServiceClass {
 
     return bacaanDoas;
   }
+
 
   Future<List<TokohHadist>> getTokoh() async {
     List<TokohHadist> tokohHadist = [];
@@ -72,6 +75,7 @@ class ServiceClass {
     return tokohHadist;
   }
 
+
   Future<List<namaJuz>> getNamaJuz() async {
     List<namaJuz> data = [];
     final url = await rootBundle.loadString("assets/datas/listAyatJuz.json");
@@ -86,11 +90,13 @@ class ServiceClass {
     return data;
   }
 
+
   Future<List<Surah>> getSurahList() async {
     final data = await rootBundle.loadString("assets/datas/listSurah.json");
 
     return surahFromJson(data);
   }
+
 
   Future<TafsirQuran> getTafsirQuran() async {
     final url = Uri.parse("https://equran.id/api/v2/tafsir/1");
@@ -100,6 +106,7 @@ class ServiceClass {
     
     return TafsirQuran.fromJson(parseData);
   }
+  
   
   Future<DetailHadis> getHadist(String buku, int nomor) async{
     final url = Uri.parse("https://api.hadith.gading.dev/books/$buku/$nomor");
@@ -118,8 +125,6 @@ class ServiceClass {
 
     Map<String, dynamic> data =
         (json.decode(res.body) as Map<String, dynamic>)["data"];
-
-        print(" Ini parseData: $data");
     // DetailClass datas = DetailClass.fromJson(data);
     return DetailClass.fromJson(data);
   }
@@ -139,17 +144,6 @@ class ServiceClass {
     List parse = jsonDecode(url.body)["data"];
     
     return parse;
-  // List<AsmaulHusna> dataKita = [];
-  // final url = await rootBundle.loadString("assets/datas/asmaulHusna.json");
-
-  // List data = jsonDecode(url);
-  // print(data);
-  // data.map((e) => {
-  //   dataKita.add(AsmaulHusna.fromJson(e))
-  // }).toList();
-
-  // return dataKita;
-
 }
 
 }

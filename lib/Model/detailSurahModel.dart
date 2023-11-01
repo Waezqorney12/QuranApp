@@ -1,13 +1,6 @@
-// To parse this JSON data, do
-//
-//     final detailClass = detailClassFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 DetailClass detailClassFromJson(String str) => DetailClass.fromJson(json.decode(str));
-
-String detailClassToJson(DetailClass data) => json.encode(data.toJson());
 
 class DetailClass {
     int nomor;
@@ -46,23 +39,9 @@ class DetailClass {
         deskripsi: json["deskripsi"],
         audioFull: Map.from(json["audioFull"]).map((k, v) => MapEntry<String, String>(k, v)),
         ayat: List<Ayat>.from(json["ayat"].map((x) => Ayat.fromJson(x))),
-        suratSelanjutnya: json["suratSelanjutnya"],
-        suratSebelumnya: json["suratSebelumnya"],
+        suratSelanjutnya: json["suratSelanjutnya"] ?? false,
+        suratSebelumnya: json["suratSebelumnya"] ?? false,
     );
-
-    Map<String, dynamic> toJson() => {
-        "nomor": nomor,
-        "nama": nama,
-        "namaLatin": namaLatin,
-        "jumlahAyat": jumlahAyat,
-        "tempatTurun": tempatTurun,
-        "arti": arti,
-        "deskripsi": deskripsi,
-        "audioFull": Map.from(audioFull).map((k, v) => MapEntry<String, dynamic>(k, v)),
-        "ayat": List<dynamic>.from(ayat.map((x) => x.toJson())),
-        "suratSelanjutnya": suratSelanjutnya,
-        "suratSebelumnya": suratSebelumnya,
-    };
 }
 
 class Ayat {
@@ -87,14 +66,6 @@ class Ayat {
         teksIndonesia: json["teksIndonesia"],
         audio: Map.from(json["audio"]).map((k, v) => MapEntry<String, String>(k, v)),
     );
-
-    Map<String, dynamic> toJson() => {
-        "nomorAyat": nomorAyat,
-        "teksArab": teksArab,
-        "teksLatin": teksLatin,
-        "teksIndonesia": teksIndonesia,
-        "audio": Map.from(audio).map((k, v) => MapEntry<String, dynamic>(k, v)),
-    };
 }
 
 class SuratSenya {
@@ -116,11 +87,4 @@ class SuratSenya {
         namaLatin: json["namaLatin"],
         jumlahAyat: json["jumlahAyat"],
     );
-
-    Map<String, dynamic> toJson() => {
-        "nomor": nomor,
-        "nama": nama,
-        "namaLatin": namaLatin,
-        "jumlahAyat": jumlahAyat,
-    };
 }
