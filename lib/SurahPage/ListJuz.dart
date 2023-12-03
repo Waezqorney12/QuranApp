@@ -33,12 +33,12 @@ class _ListJuzState extends State<ListJuz> {
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(
             child: poppinText(context, "Data tidak ada", FontWeight.bold, 20,
-                            Colors.white, 20),
+                            Colors.white),
           );
         }else if(snapshot.hasError){
           return Center(
             child: poppinText(context, "Data error atau sedang tidak tersedia", FontWeight.bold, 20,
-                            Colors.white, 20),
+                            Colors.white)
           );
         }
         final namajuz = snapshot.data ;
@@ -69,8 +69,7 @@ class _ListJuzState extends State<ListJuz> {
                                         nomor.toString(),
                                         FontWeight.w500,
                                         14,
-                                        PaletWarna.putihTeks,
-                                        14)),
+                                        PaletWarna.putihTeks)),
                                 Center(
                                   child: Image.asset(assetDart.boxNomor),
                                 )
@@ -81,8 +80,8 @@ class _ListJuzState extends State<ListJuz> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           poppinText(context, "Juz $nomor", FontWeight.bold, 16,
-                              Colors.white, 16),
-                          poppinText(context, namajuz[index].ket, FontWeight.w400, 14, Colors.white, 14)
+                              Colors.white),
+                          poppinText(context, namajuz[index].ket, FontWeight.w400, 14, Colors.white)
                         ],
                       )
                     ],

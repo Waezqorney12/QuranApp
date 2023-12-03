@@ -1,4 +1,4 @@
-import 'package:al_quran/AsmaulHusna.dart';
+import 'package:al_quran/AsmaulPage/AsmaulHusna.dart';
 import 'package:al_quran/Dashboard.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';

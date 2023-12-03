@@ -81,7 +81,7 @@ class ListNiatSholatState extends State<ListNiatSholat> {
                                         FontWeight.w500,
                                         14,
                                         Colors.white,
-                                        14),
+                                        )
                                   ),
                                 ),
                                 SizedBox(
@@ -99,9 +99,8 @@ class ListNiatSholatState extends State<ListNiatSholat> {
                             dataNiat[index].name,
                             FontWeight.w500,
                             16,
-                            Colors.white,
-                            16,
-                          ),
+                            Colors.white
+                          )
                         ),
                       ],
                     ),
@@ -130,12 +129,12 @@ class ListNiatSholatState extends State<ListNiatSholat> {
                               height: Dimensions.height20(context),
                             ),
                             poppinText(context, dataNiat[index].latin,
-                                FontWeight.w500, 16, PaletWarna.unguMuda, 16),
+                                FontWeight.w500, 16, PaletWarna.unguMuda),
                             SizedBox(
                               height: Dimensions.height20(context),
                             ),
                             poppinText(context, dataNiat[index].terjemahan,
-                                FontWeight.w500, 16, PaletWarna.unguTeks, 16),
+                                FontWeight.w500, 16, PaletWarna.unguTeks)
                           ],
                         ),
                       ),

@@ -45,8 +45,7 @@ class _ListHadistState extends State<ListHadist> {
                     "Terjadi kesalahan, berikut: ${snapshot.error}",
                     FontWeight.bold,
                     20,
-                    Colors.white,
-                    20),
+                    Colors.white)
               );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
               return Center(
@@ -55,8 +54,7 @@ class _ListHadistState extends State<ListHadist> {
                     "Data kosong dan tidak bisa diakses, coba lagi nanti",
                     FontWeight.bold,
                     20,
-                    Colors.white,
-                    20),
+                    Colors.white)
               );
             } else {
               final dataTokohs = snapshot.data!;
@@ -97,8 +95,7 @@ class _ListHadistState extends State<ListHadist> {
                                                   .toString(),
                                               FontWeight.w500,
                                               14,
-                                              Colors.white,
-                                              14,
+                                              Colors.white
                                             ),
                                           ),
                                         ),
@@ -125,8 +122,7 @@ class _ListHadistState extends State<ListHadist> {
                                           dataTokohs[index].name,
                                           FontWeight.w500,
                                           16,
-                                          Colors.white,
-                                          16,
+                                          Colors.white
                                         ),
                                         SizedBox(
                                           height: Dimensions.height5(context),
@@ -136,8 +132,7 @@ class _ListHadistState extends State<ListHadist> {
                                           "Jumlah Hadist: ${dataTokohs[index].available.toString()}",
                                           FontWeight.w500,
                                           14,
-                                          PaletWarna.unguTeks,
-                                          14,
+                                          PaletWarna.unguTeks
                                         ),
                                       ],
                                     )),
@@ -267,8 +262,7 @@ class _ListHadistState extends State<ListHadist> {
                                                 "Submit",
                                                 FontWeight.bold,
                                                 14,
-                                                PaletWarna.unguTua,
-                                                14),
+                                                PaletWarna.unguTua),
                                           ),
                                         )),
                                   ],

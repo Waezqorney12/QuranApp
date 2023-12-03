@@ -71,7 +71,6 @@ class _ListNiatDoaState extends State<ListNiatDoa> {
                               
                               isExpandedList[index] = expanded;
                               isExpansion[index].isGrey = expanded;
-                              print(Provider.of<ExpansionColor>(context,listen: false).isGrey = expanded);
                             },
                             title: Row(
                               children: [
@@ -79,28 +78,15 @@ class _ListNiatDoaState extends State<ListNiatDoa> {
                                   padding: EdgeInsets.only(
                                       right: Dimensions.widht15(context)),
                                   child: SizedBox(
-                                    height: Dimensions.height36(context),
-                                    width: Dimensions.widht36(context),
+                                          height: Dimensions.height36(context),
+                                          width: Dimensions.widht36(context),
                                     child: Stack(
                                       children: [
                                         SizedBox(
-                                          height: Dimensions.height36(context),
-                                          width: Dimensions.widht36(context),
                                           child: Center(
-                                              child: poppinText(
-                                                  context,
-                                                  dataBacaanDoa[index].id,
-                                                  FontWeight.w500,
-                                                  14,
-                                                  Colors.white,
-                                                  14)),
+                                              child: poppinText(context,dataBacaanDoa[index].id,FontWeight.w500,14,Colors.white)),
                                         ),
-                                        SizedBox(
-                                            height:
-                                                Dimensions.height36(context),
-                                            width: Dimensions.widht36(context),
-                                            child:
-                                                Image.asset(assetDart.boxNomor))
+                                        Image.asset(assetDart.boxNomor)
                                       ],
                                     ),
                                   ),
@@ -112,8 +98,7 @@ class _ListNiatDoaState extends State<ListNiatDoa> {
                                         dataBacaanDoa[index].doa,
                                         FontWeight.w500,
                                         16,
-                                        Colors.white,
-                                        16)),
+                                        Colors.white))
                               ],
                             ),
                             trailing: Consumer<ExpansionColor>(

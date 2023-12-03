@@ -79,7 +79,7 @@ class _CompasClassState extends State<CompasClass> {
           children: [
             SizedBox(height: Dimensions.height30(context),),
             Center(
-              child: poppinText(context, "Arah Kiblat", FontWeight.bold, 16, PaletWarna.background, 16),
+              child: poppinText(context, "Arah Kiblat", FontWeight.bold, 16, PaletWarna.background)
             ),
             Container(
                 padding: EdgeInsets.symmetric(
@@ -94,13 +94,13 @@ class _CompasClassState extends State<CompasClass> {
               
             ),
             Center(
-              child: poppinText(context, widget.kecamatan.toString(), FontWeight.normal, 16, PaletWarna.background, 16),
+              child: poppinText(context, widget.kecamatan.toString(), FontWeight.normal, 16, PaletWarna.background)
             ),
             Center(
-              child: poppinText(context, widget.provinsi.toString(), FontWeight.bold, 16, PaletWarna.background, 16),
+              child: poppinText(context, widget.provinsi.toString(), FontWeight.bold, 16, PaletWarna.background)
             ),
             Center(
-              child: poppinText(context, widget.negara.toString(), FontWeight.bold, 16, PaletWarna.background, 16),
+              child: poppinText(context, widget.negara.toString(), FontWeight.bold, 16, PaletWarna.background)
             ),
           ],
         );

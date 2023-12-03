@@ -1,8 +1,8 @@
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/Model/detailSurahModel.dart';
-import 'package:al_quran/Model/listSurahModel.dart';
 import 'package:al_quran/Service/ServiceClass.dart';
 import 'package:al_quran/Service/SongService.dart';
+import 'package:al_quran/data/SQFLITE/bookmark.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
@@ -145,7 +145,7 @@ class _DetailSurahState extends State<DetailSurah> {
             itemCount: surah.jumlahAyat,
             itemBuilder: (context, index) {
               final Ayat ayat = surah.ayat[index];
-              return _ayat(context: context, ayat: ayat, surah: surah
+              return _ayat(context: context, ayat: ayat, surah: surah, index: index
                   // surats: surats
                   );
             },
@@ -158,7 +158,7 @@ class _DetailSurahState extends State<DetailSurah> {
   Padding _ayat(
       {required BuildContext context,
       required Ayat ayat,
-      required DetailClass surah}) {
+      required DetailClass surah,required int index}) {
     return Padding(
       padding: EdgeInsets.only(
         right: Dimensions.widht30(context),
@@ -195,8 +195,7 @@ class _DetailSurahState extends State<DetailSurah> {
                         ayat.nomorAyat.toString(),
                         FontWeight.w500,
                         10,
-                        Colors.white,
-                        10,
+                        Colors.white
                       ),
                     ),
                   ),
@@ -209,46 +208,23 @@ class _DetailSurahState extends State<DetailSurah> {
                 _buttonIcon(() {
                   Song().playAudio(ayat.audio["05"]);
                 }, Icons.play_arrow_outlined),
-                _buttonIcon(() {
-                  Song().stopAudio(ayat.audio["05"]);
+                _buttonIcon(() async {
+                  await DatabaseManager.createBookmark( surah, ayat, index, true);
                 }, Icons.bookmark_outline),
               ],
             ),
           ),
           SizedBox(height: Dimensions.height24(context)),
-          _teksAyat(
-            context,
-            ayat,
-            ayat.teksArab,
-            FontWeight.bold,
-            Colors.white,
-            TextAlign.end,
-            24,
-            padding: EdgeInsets.only(bottom: Dimensions.height20(context)),
+          _teksAyat( context, ayat, ayat.teksArab, FontWeight.bold, Colors.white, TextAlign.end, 24, padding: EdgeInsets.only(bottom: Dimensions.height20(context)),
           ),
           SizedBox(
             width: Dimensions.widht326(context),
-            child: _teksAyat(
-              context,
-              ayat,
-              ayat.teksLatin,
-              FontWeight.normal,
-              PaletWarna.unguMuda,
-              TextAlign.start,
-              18,
-              padding: EdgeInsets.only(bottom: Dimensions.height10(context)),
+            child: _teksAyat( context, ayat, ayat.teksLatin, FontWeight.normal, PaletWarna.unguMuda, TextAlign.start, 18, padding: EdgeInsets.only(bottom: Dimensions.height10(context)),
             ),
           ),
           SizedBox(
             width: Dimensions.widht326(context),
-            child: _teksAyat(
-              context,
-              ayat,
-              ayat.teksIndonesia,
-              FontWeight.normal,
-              PaletWarna.unguTeks,
-              TextAlign.start,
-              18,
+            child: _teksAyat(context,ayat,ayat.teksIndonesia,FontWeight.normal,PaletWarna.unguTeks,TextAlign.start,18,
             ),
           ),
         ],
@@ -323,26 +299,14 @@ class _DetailSurahState extends State<DetailSurah> {
                       SizedBox(
                         height: Dimensions.height20(context),
                       ),
-                      poppinText(
-                        context,
-                        surah.namaLatin,
-                        FontWeight.w500,
-                        22,
-                        Colors.white,
-                        22,
+                      poppinText(context,surah.namaLatin,FontWeight.w500,22,Colors.white
                       ),
                       Padding(
                         padding: EdgeInsets.only(
                           top: Dimensions.height4(context),
                           bottom: Dimensions.height10(context),
                         ),
-                        child: poppinText(
-                          context,
-                          "The Opening",
-                          FontWeight.w500,
-                          16,
-                          Colors.white,
-                          16,
+                        child: poppinText(context,surah.arti,FontWeight.w500,16,Colors.white
                         ),
                       ),
                       Divider(
@@ -363,8 +327,7 @@ class _DetailSurahState extends State<DetailSurah> {
                               surah.tempatTurun,
                               FontWeight.w500,
                               14,
-                              Colors.white,
-                              14,
+                              Colors.white
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -384,9 +347,7 @@ class _DetailSurahState extends State<DetailSurah> {
                               "${surah.jumlahAyat} Ayat",
                               FontWeight.w500,
                               14,
-                              Colors.white,
-                              14,
-                            ),
+                              Colors.white),
                           ],
                         ),
                       ),

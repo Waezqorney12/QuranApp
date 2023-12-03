@@ -1,4 +1,3 @@
-import 'package:al_quran/AppBar/AppBar.dart';
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/Model/detailHadisModel.dart';
 import 'package:al_quran/Service/ServiceClass.dart';
@@ -7,13 +6,12 @@ import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DetailHadist extends StatefulWidget {
-  int nomorHadist;
-  String namaBuku;
-  DetailHadist({super.key, required this.nomorHadist, required this.namaBuku});
+  final int nomorHadist;
+  final String namaBuku;
+  const DetailHadist({super.key, required this.nomorHadist, required this.namaBuku});
 
   @override
   State<DetailHadist> createState() => _DetailHadistState();
@@ -36,7 +34,7 @@ class _DetailHadistState extends State<DetailHadist> {
                     children: [
                       CircularProgressIndicator(),
                       poppinText(context, "Mohon Tunggu", FontWeight.w500, 16,
-                          PaletWarna.unguMuda, 16)
+                          PaletWarna.unguMuda)
                     ],
                   ),
                 ),
@@ -55,7 +53,7 @@ class _DetailHadistState extends State<DetailHadist> {
               backgroundColor: PaletWarna.background,
               body: Center(
                 child: poppinText(context, "Data tidak ditemukan",
-                    FontWeight.w500, 16, PaletWarna.unguMuda, 16),
+                    FontWeight.w500, 16, PaletWarna.unguMuda)
               ),
             );
           }
@@ -136,16 +134,16 @@ class _DetailHadistState extends State<DetailHadist> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           poppinText(context, hadiss.data.name, FontWeight.bold,
-                              16, PaletWarna.unguTeks, 16),
+                              16, PaletWarna.unguTeks),
                           poppinText(context, " No.${dataHadist.number.toString()}",
-                              FontWeight.bold, 16, PaletWarna.unguTeks, 16),
+                              FontWeight.bold, 16, PaletWarna.unguTeks)
                         ],
                       ),
                       _teksAyat(context,dataHadist,dataHadist.arab,FontWeight.bold,PaletWarna.putihTeks,TextAlign.end,20,
                           padding: EdgeInsets.symmetric(
                               vertical: Dimensions.height20(context))),
                       poppinText(context, dataHadist.id, FontWeight.w500, 16,
-                          PaletWarna.unguTeks.withOpacity(.8), 16),
+                          PaletWarna.unguTeks.withOpacity(.8))
                     ],
                   ),
                 );

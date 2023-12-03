@@ -1,6 +1,6 @@
+import 'package:al_quran/SimpanPage/Simpan.dart';
 import 'package:al_quran/SurahPage/Surah.dart';
 import 'package:al_quran/SholatPage/Sholat.dart';
-import 'package:al_quran/SimpanPage/Simpan.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -28,12 +28,6 @@ class _DashboardState extends State<Dashboard> {
     setState(() {
       onClick = true;
     });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
   }
 
   @override

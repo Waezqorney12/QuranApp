@@ -196,10 +196,8 @@ class _SholatState extends State<Sholat> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            poppinText(context,context.watch<ModelTime>().time!,FontWeight.bold,12,Colors.white,12,
-                            ),
-                            poppinText(context,context.watch<ModelTime>().date!,FontWeight.w400,12,Colors.white,12,
-                            ),
+                            poppinText(context,context.watch<ModelTime>().time!,FontWeight.bold,12,Colors.white),
+                            poppinText(context,context.watch<ModelTime>().date!,FontWeight.w400,12,Colors.white)
                           ],
                         ),
                       ),
@@ -248,12 +246,9 @@ class _SholatState extends State<Sholat> {
                                   SizedBox(
                                     height: Dimensions.height5(context),
                                   ),
-                                  poppinText(context,pronvisi,FontWeight.bold,12,PaletWarna.unguTua,12,
-                                  ),
-                                  poppinText(context,kecamatan,FontWeight.w500,10,Colors.white,10,
-                                  ),
-                                  poppinText(context,jalan,FontWeight.w400,10,Colors.white,10,
-                                  ),
+                                  poppinText(context,pronvisi,FontWeight.bold,12,PaletWarna.unguTua),
+                                  poppinText(context,kecamatan,FontWeight.w500,10,Colors.white),
+                                  poppinText(context,jalan,FontWeight.w400,10,Colors.white)
                                 ],
                               )
                             : Center(
@@ -272,7 +267,7 @@ class _SholatState extends State<Sholat> {
                                     ),
                                   ),
                                   poppinText(context, "Mohon Tunggu",
-                                      FontWeight.bold, 10, Colors.white, 10)
+                                      FontWeight.bold, 10, Colors.white)
                                 ],
                               )),
                       ),
@@ -292,7 +287,7 @@ class _SholatState extends State<Sholat> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 poppinText(context, "Kumpulan Doa, Niat beserta artinya",
-                    FontWeight.bold, 18, Colors.white, 18)
+                    FontWeight.bold, 18, Colors.white)
               ],
             )),
         SizedBox(
@@ -315,9 +310,8 @@ class _SholatState extends State<Sholat> {
           ),
           child: Image.asset(images),
         ),
-        poppinText(context, nama, FontWeight.w500, 14, Colors.white, 14),
-        poppinText(
-            context, waktu, FontWeight.w500, 12, PaletWarna.teksWaktu, 12)
+        poppinText(context, nama, FontWeight.w500, 14, Colors.white),
+        poppinText(context, waktu, FontWeight.w500, 12, PaletWarna.teksWaktu)
       ],
     );
   }

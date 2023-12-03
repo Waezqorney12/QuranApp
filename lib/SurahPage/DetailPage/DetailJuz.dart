@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:al_quran/AppBar/AppBar.dart';
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/Service/ServiceClass.dart';
@@ -7,15 +5,14 @@ import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:al_quran/library_asset/icon_image/assetz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:al_quran/Model/detailJuzModel.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailJuzs extends StatelessWidget {
-  dynamic nomorJuz;
-  DetailJuzs({super.key, required this.nomorJuz});
+  final dynamic nomorJuz;
+  const DetailJuzs({super.key, required this.nomorJuz});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,7 @@ class DetailJuzs extends StatelessWidget {
                     height: Dimensions.height5(context),
                   ),
                   poppinText(context, "Mohon Tunggu", FontWeight.bold, 14,
-                      PaletWarna.unguTeks, 14),
+                      PaletWarna.unguTeks)
                 ],
               ),
             ),
@@ -46,7 +43,7 @@ class DetailJuzs extends StatelessWidget {
             backgroundColor: PaletWarna.background,
             body: Center(
               child: poppinText(context, "Data tidak ada", FontWeight.bold, 14,
-                  PaletWarna.unguTeks, 14),
+                  PaletWarna.unguTeks)
             ),
           );
         } else if (snapshot.hasError) {
@@ -54,7 +51,7 @@ class DetailJuzs extends StatelessWidget {
             backgroundColor: PaletWarna.background,
             body: Center(
               child: poppinText(context, "Error tidak diketahui",
-                  FontWeight.bold, 14, PaletWarna.unguTeks, 14),
+                  FontWeight.bold, 14, PaletWarna.unguTeks)
             ),
           );
         }
@@ -78,8 +75,7 @@ class DetailJuzs extends StatelessWidget {
                     itemBuilder: (context, index) {
                       Id id = Id.fromJson(detailVerses[index]["tafsir"]["id"]);
                       Texts texts = Texts.fromJson(detailVerses[index]["text"]);
-                      Transliteration transliteration =
-                          Transliteration.fromJson(
+                      Transliteration transliteration =Transliteration.fromJson(
                               detailVerses[index]["text"]["transliteration"]);
                       Numbers numbers =
                           Numbers.fromJson(detailVerses[index]["number"]);
@@ -116,10 +112,7 @@ class DetailJuzs extends StatelessWidget {
                                             child: poppinText(
                                                 context,
                                                 "Page: ${detailVerses[index]["meta"]["page"]}",
-                                                FontWeight.bold,
-                                                20,
-                                                PaletWarna.putihTeks,
-                                                20),
+                                                FontWeight.bold,20,PaletWarna.putihTeks),
                                           ),
                                         )),
                                     Padding(
@@ -127,10 +120,8 @@ class DetailJuzs extends StatelessWidget {
                                           vertical:
                                               Dimensions.height40(context)),
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.symmetric(
@@ -138,53 +129,33 @@ class DetailJuzs extends StatelessWidget {
                                                     context)),
                                             child: Row(
                                               children: [
-                                                Icon(
-                                                  size: 30,
-                                                  Icons.play_arrow_outlined,
-                                                  color: PaletWarna.unguIcon,
-                                                ),
+                                                Icon(size: 30,Icons.play_arrow_outlined,color: PaletWarna.unguIcon),
                                                 SizedBox(
-                                                  width: Dimensions.widht10(
-                                                      context),
-                                                ),
-                                                poppinText(
-                                                    context,
-                                                    "Play Muratal",
-                                                    FontWeight.normal,
-                                                    16,
-                                                    PaletWarna.putihTeks,
-                                                    16)
+                                                  width: Dimensions.widht10(context)),
+                                                poppinText(context,"Play Muratal",FontWeight.normal,16,PaletWarna.putihTeks)
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: Dimensions.height15(
-                                                    context),
-                                                horizontal: Dimensions.widht10(
-                                                    context)),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  size: 30,
-                                                  Icons.share_outlined,
-                                                  color: PaletWarna.unguIcon,
+                                          InkWell(
+                                            onTap: () async {
+                                              await Share.share(texts.arab[index],);
+                                              await Share.share(transliteration.en![index]);
+                                              await Share.share(translation.id[index]);
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: Dimensions.height15(context),
+                                                  horizontal: Dimensions.widht10(context)),
+                                              child: Row(
+                                                  children: [
+                                                    Icon(size: 30,Icons.share_outlined,color: PaletWarna.unguIcon),
+                                                    SizedBox(width: Dimensions.widht10(context)),
+                                                    poppinText(context,"Share Ayat",FontWeight.normal,16,PaletWarna.putihTeks)
+                                                  ],
                                                 ),
-                                                SizedBox(
-                                                  width: Dimensions.widht10(
-                                                      context),
-                                                ),
-                                                poppinText(
-                                                    context,
-                                                    "Share Ayat",
-                                                    FontWeight.normal,
-                                                    16,
-                                                    PaletWarna.putihTeks,
-                                                    16)
-                                              ],
                                             ),
                                           ),
-                                          GestureDetector(
+                                          InkWell(
                                             onTap: () {
                                               showDialog(
                                                 context: context,
@@ -193,13 +164,7 @@ class DetailJuzs extends StatelessWidget {
                                                   title: Title(
                                                       color:
                                                           PaletWarna.background,
-                                                      child: poppinText(
-                                                          context,
-                                                          "Tafsir Ayat: ${numbers.inSurah}",
-                                                          FontWeight.bold,
-                                                          16,
-                                                          PaletWarna.background,
-                                                          16)),
+                                                      child: poppinText(context,"Tafsir Ayat: ${numbers.inSurah}",FontWeight.bold,16,PaletWarna.background)),
                                                   content: SizedBox(
                                                       height: Dimensions.height450(context),
                                                       width: Dimensions.widht315(context),
@@ -207,14 +172,7 @@ class DetailJuzs extends StatelessWidget {
                                                         scrollDirection:
                                                             Axis.vertical,
                                                         children: [
-                                                          poppinText(
-                                                              context,
-                                                              id.long,
-                                                              FontWeight.normal,
-                                                              16,
-                                                              PaletWarna
-                                                                  .background,
-                                                              16),
+                                                          poppinText(context,id.long,FontWeight.normal,16,PaletWarna.background),
                                                         ],
                                                       )),
                                                   actions: [
@@ -223,14 +181,7 @@ class DetailJuzs extends StatelessWidget {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child: poppinText(
-                                                            context,
-                                                            "Close",
-                                                            FontWeight.bold,
-                                                            16,
-                                                            PaletWarna
-                                                                .background,
-                                                            16)),
+                                                        child: poppinText(context,"Close",FontWeight.bold,16,PaletWarna.background)),
                                                   ],
                                                 ),
                                               );
@@ -251,13 +202,7 @@ class DetailJuzs extends StatelessWidget {
                                                     width: Dimensions.widht10(
                                                         context),
                                                   ),
-                                                  poppinText(
-                                                      context,
-                                                      "Tafsir Ayat",
-                                                      FontWeight.normal,
-                                                      16,
-                                                      PaletWarna.putihTeks,
-                                                      16)
+                                                  poppinText(context,"Tafsir Ayat",FontWeight.normal,16,PaletWarna.putihTeks)
                                                 ],
                                               ),
                                             ),
@@ -305,14 +250,7 @@ class DetailJuzs extends StatelessWidget {
                                               .withOpacity(.7),
                                         ),
                                         child: Center(
-                                          child: poppinText(
-                                            context,
-                                            numbers.inSurah.toString(),
-                                            FontWeight.bold,
-                                            14,
-                                            Colors.white,
-                                            14,
-                                          ),
+                                          child: poppinText(context,numbers.inSurah.toString(),FontWeight.bold,14,Colors.white),
                                         ),
                                       ),
                                     ),
@@ -325,14 +263,7 @@ class DetailJuzs extends StatelessWidget {
                                                   Dimensions.widht15(context)),
                                           child: Align(
                                             alignment: Alignment.centerRight,
-                                            child: poppinText(
-                                              context,
-                                              texts.arab.toString(),
-                                              FontWeight.bold,
-                                              22,
-                                              Colors.white,
-                                              22,
-                                            ),
+                                            child: poppinText(context,texts.arab.toString(),FontWeight.bold,22,Colors.white),
                                           ),
                                         ),
                                         Padding(
@@ -341,14 +272,7 @@ class DetailJuzs extends StatelessWidget {
                                                   Dimensions.height15(context)),
                                           child: SizedBox(
                                             width: Dimensions.widht326(context),
-                                            child: poppinText(
-                                                context,
-                                                transliteration.en.toString(),
-                                                FontWeight.normal,
-                                                16,
-                                                PaletWarna.unguMuda
-                                                    .withOpacity(.85),
-                                                16),
+                                            child: poppinText(context,transliteration.en.toString(),FontWeight.normal,16,PaletWarna.unguMuda    .withOpacity(.85))
                                           ),
                                         ),
                                         Padding(
@@ -357,14 +281,7 @@ class DetailJuzs extends StatelessWidget {
                                                   Dimensions.height15(context)),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
-                                            child: poppinText(
-                                              context,
-                                              translation.id.toString(),
-                                              FontWeight.normal,
-                                              16,
-                                              PaletWarna.unguTeks,
-                                              16,
-                                            ),
+                                            child: poppinText(context,translation.id.toString(),FontWeight.normal,16,PaletWarna.unguTeks),
                                           ),
                                         ),
                                       ]),

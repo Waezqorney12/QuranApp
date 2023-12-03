@@ -70,8 +70,7 @@ class ListSurah extends StatelessWidget {
                           "${surah.nomor}",
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
-                            fontSize:
-                                14 / MediaQuery.textScaleFactorOf(context),
+                            fontSize:14 / MediaQuery.textScaleFactorOf(context),
                             color: Colors.white,
                           ),
                         ),

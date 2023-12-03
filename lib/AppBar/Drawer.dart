@@ -40,7 +40,7 @@ ListTile listIcon(BuildContext context, IconData icon, String teks, {VoidCallbac
               )),
           Expanded(
             child: poppinText(context, teks, FontWeight.w500, 16,
-                PaletWarna.unguTeks.withOpacity(0.8), 16),
+                PaletWarna.unguTeks.withOpacity(0.8))
           ),
         ],
       ),
@@ -49,24 +49,21 @@ ListTile listIcon(BuildContext context, IconData icon, String teks, {VoidCallbac
 }
 
 Text poppinText(BuildContext context, String fontText, FontWeight fontWeight,
-    double fontSizeText, Color colors, double copyFontSize, {TextAlign? align}) {
+    double fontSizeText, Color colors,  {TextAlign? align}) {
   return Text(
     
     fontText,
     style: GoogleFonts.poppins(
-      
       fontWeight: fontWeight,
-      fontSize: fontSizeText,
+      fontSize: fontSizeText/ MediaQuery.textScaleFactorOf(context),
       color: colors,
-    ).copyWith(fontSize: copyFontSize / MediaQuery.textScaleFactorOf(context)),
+    )
   );
 }
   Text poppingTextNoColor(BuildContext context, String text,
       FontWeight fontWeight, double fontSize, double copyFontSize) {
     return Text(
       text,
-      style: GoogleFonts.poppins(fontWeight: fontWeight, fontSize: fontSize)
-          .copyWith(
-              fontSize: copyFontSize / MediaQuery.textScaleFactorOf(context)),
+      style: GoogleFonts.poppins(fontWeight: fontWeight, fontSize: fontSize / MediaQuery.textScaleFactorOf(context))
     );
   }

@@ -2,6 +2,7 @@ import 'package:al_quran/AppBar/AppBar.dart';
 import 'package:al_quran/AppBar/Drawer.dart';
 import 'package:al_quran/SurahPage/ListJuz.dart';
 import 'package:al_quran/SurahPage/listSurah.dart';
+import 'package:al_quran/data/SQFLITE/bookmark.dart';
 import 'package:al_quran/library_asset/color.dart';
 import 'package:al_quran/library_asset/dimensions.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,24 @@ class Surah extends StatefulWidget {
 
 class _SurahState extends State<Surah> {
   final logger = Logger();
+  List <Map<String, dynamic>> Bookmark = []; 
+
+  void fetchData() async{
+    final data = await DatabaseManager.getBookmark();
+    final lastBookmark = data.last;
+    setState(() {
+        Bookmark = [lastBookmark];
+        print(Bookmark);
+    });
+    
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +109,7 @@ class _SurahState extends State<Surah> {
                 )),
             Expanded(
               child: poppinText(context, teks, FontWeight.w500, 16,
-                  PaletWarna.unguTeks.withOpacity(0.8), 16),
+                  PaletWarna.unguTeks.withOpacity(0.8)),
             ),
           ],
         ),
@@ -213,13 +232,28 @@ class _SurahState extends State<Surah> {
               Padding(
                   padding: EdgeInsets.only(left: Dimensions.widht20(context)),
                   child: Text(
-                    "Al-Baqarah",
+                    Bookmark.isNotEmpty ? Bookmark[0]["surah"] : "No Boorkmark",
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
                       fontSize: 18.0, // Ukuran font dasar
                       color: Colors.white,
                     ).copyWith(
                         fontSize: 18.0 / MediaQuery.textScaleFactorOf(context)),
+                  )),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                  padding: EdgeInsets.only(left: Dimensions.widht20(context)),
+                  child: Text(
+                    "Nomor Ayat: ${Bookmark.isNotEmpty ? Bookmark[0]["nomorAyat"] : "No Boorkmark"}",
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 0, 
+                      color: Colors.white,
+                    ).copyWith(
+                        fontSize: 14.0 / MediaQuery.textScaleFactorOf(context)),
                   )),
             ],
           ),
