@@ -7,8 +7,8 @@
 
 import 'dart:convert';
 
-import 'package:al_quran/Model/detailSurahModel.dart';
-import 'package:al_quran/Service/ServiceClass.dart';
+import 'package:al_quran/data/Model/detailSurahModel.dart';
+import 'package:al_quran/data/Service/ServiceClass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
